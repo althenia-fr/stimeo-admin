@@ -1,0 +1,23 @@
+@import './base.css';
+
+:root {
+  --stimeo-primary: #b7aa40;
+  --stimeo-accent: #91873e;
+  --stimeo-bg: #FFFFFF;           /* Fond ultra-clair */
+  --stimeo-text: #1E293B;         /* Texte principal */
+  --stimeo-text-light: #64748B;   /* Texte secondaire */
+  --stimeo-border: #E2E8F0;       /* Lignes de séparation */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--stimeo-bg);
+  color: var(--stimeo-text);
+  -webkit-font-smoothing: antialiased;
+}
