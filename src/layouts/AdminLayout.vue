@@ -10,18 +10,37 @@
           <font-awesome-icon icon="fa-solid fa-cart-plus"/>
           <span class="label">Catalogue</span>
         </router-link>
-        <router-link to="/auth/delegates" class="menu-item" active-class="active">
-          <font-awesome-icon icon="fa-solid fa-user"/>
-          <span class="label">Délégués</span>
-        </router-link>
-        <router-link to="/auth/sites" class="menu-item" active-class="active">
-          <font-awesome-icon icon="fa-solid fa-house-medical"/>
-          <span class="label">Etablissements</span>
-        </router-link>
-        <router-link to="/auth/teams" class="menu-item" active-class="active">
-          <font-awesome-icon icon="fa-solid fa-user-nurse"/>
-          <span class="label">Services</span>
-        </router-link>
+
+        <div class="menu-group">
+          <div
+              class="menu-item group-title"
+              @click="toggleOrganisation"
+              :class="{ 'open': isOrganisationOpen }"
+          >
+            <font-awesome-icon :icon="isOrganisationOpen ? 'fa-regular fa-square-minus' : 'fa-regular fa-square-plus'"/>
+            <span class="label">Organisations</span>
+          </div>
+
+          <div class="sub-menu" v-show="isOrganisationOpen">
+
+            <router-link to="/auth/delegates" class="menu-item" active-class="active">
+              <font-awesome-icon icon="fa-solid fa-user"/>
+              <span class="label">Délégués</span>
+            </router-link>
+
+            <router-link to="/auth/sites" class="menu-item" active-class="active">
+              <font-awesome-icon icon="fa-solid fa-house-medical"/>
+              <span class="label">Etablissements</span>
+            </router-link>
+
+            <router-link to="/auth/teams" class="menu-item" active-class="active">
+              <font-awesome-icon icon="fa-solid fa-user-nurse"/>
+              <span class="label">Services</span>
+            </router-link>
+
+          </div>
+        </div>
+
       </nav>
 
       <div class="sidebar-footer">
@@ -45,6 +64,13 @@
 import {goTo} from "@/router/router.js";
 import MsgModal from "@/components/MsgModal.vue";
 import {storageService} from "@/utils/storage.js";
+import {ref} from "vue";
+
+const isOrganisationOpen = ref(false);
+
+const toggleOrganisation = () => {
+  isOrganisationOpen.value = !isOrganisationOpen.value;
+};
 
 const logout = () => {
   storageService.removeItem('admin');
@@ -125,5 +151,70 @@ const logout = () => {
   overflow-y: auto;
   background-color: var(--stimeo-bg);
 }
+
+
+/* Styles du menu parent */
+.menu-group {
+  margin-bottom: 0.5rem;
+}
+
+.group-title {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Le chevron d'ouverture */
+.chevron {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+  color: #94a3b8;
+}
+
+/* On tourne le chevron quand le menu est ouvert */
+.group-title.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* Styles des sous-menus */
+.sub-menu {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.2rem; /* Indentation */
+  margin-top: 0.25rem;
+  padding-left: 0.5rem;
+}
+
+.sub-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  color: #475569;
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+  margin-bottom: 0.15rem;
+}
+
+.sub-menu-item:hover {
+  background: #f1f5f9;
+  color: var(--stimeo-primary, #2c3e50);
+}
+
+.sub-menu-item.active {
+  color: var(--stimeo-primary, #2c3e50);
+  font-weight: 600;
+  background: #e0f2fe; /* Couleur de fond d'un sous-menu actif */
+}
+
+.icon-sm {
+  font-size: 0.85rem;
+  margin-right: 0.5rem;
+  opacity: 0.7;
+}
+
+
+
 </style>
 

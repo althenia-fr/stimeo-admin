@@ -42,27 +42,6 @@ input:focus {
     box-shadow: 0 0 0 3px rgba(10, 37, 64, 0.08);
 }
 
-.btn-primary {
-    width: 100%;
-    padding: 0.8rem;
-    background: var(--stimeo-primary);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: opacity 0.2s, transform 0.1s;
-}
-
-.btn-primary:hover {
-    opacity: 0.95;
-}
-
-.btn-primary:active {
-    transform: scale(0.99);
-}
-
 .form-footer {
     text-align: center;
     margin-top: 1.5rem;

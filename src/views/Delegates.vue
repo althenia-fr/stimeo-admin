@@ -15,9 +15,9 @@
         <thead>
         <tr>
           <th>Nom</th>
-          <th>Prénom</th>
+          <th style="width: 15%">Prénom</th>
           <th>Email</th>
-          <th>Mobile</th>
+          <th style="width: 15%">Mobile</th>
           <th class="text-center">Actions</th>
         </tr>
         </thead>
@@ -43,6 +43,10 @@
             <button class="action-btn edit-btn" @click="delegateModal.openEditModal(delegate)" title="Modifier">
               <font-awesome-icon icon="fa-solid fa-pen"/>
             </button>
+            &nbsp;
+            <button class="action-btn edit-btn" @click="confirmDeleteModal(delegate)" title="Effacer">
+              <font-awesome-icon icon="fa-solid fa-trash-can"/>
+            </button>
           </td>
         </tr>
         </tbody>
@@ -62,6 +66,9 @@ import {storageService} from "@/utils/storage.js";
 import axios from "axios";
 import {API_BASE_URL} from "@/utils/http.js";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {siteModal} from "@/utils/modals/site-modal.js";
+import {msgModal} from "@/utils/modals/msg-modal.js";
+import {prettyPrintErrorMsg} from "@/utils/error.js";
 
 const isLoadingTable = ref(false);
 const fetchDelegates = async () => {
@@ -83,6 +90,50 @@ const fetchDelegates = async () => {
     isLoadingTable.value = false;
   }
 };
+
+
+const doDeleteDelegate = async (delegate) => {
+
+  try {
+    const payload = {
+      uid: delegate.uid,
+    };
+
+    let admin = storageService.getItem('admin');
+    let axiosRequestConfig = {
+      headers: {
+        'Content-Type':'application/json; charset=utf-8',
+        'Authorization': 'Basic ' + admin.secret,
+      }
+    }
+
+    // 3. Appel POST Axios standard
+    msgModal.show('Opération en cours', "Veuillez patienter...");
+    const response = await axios.post(API_BASE_URL+'/admin/delegate/delete', payload,axiosRequestConfig);
+    msgModal.defaultClose();
+
+    if(response.status===200)
+    {
+      if (response.data) delegateModal.delegates = response.data;
+    }
+    else
+    {
+      msgModal.show('Erreur', "code "+response.status, 'OK',function(){msgModal.defaultClose();delegateModal.isOpen = true;});
+    }
+
+  } catch (error) {
+    let err = prettyPrintErrorMsg(error.response)
+    console.error("Erreur:",err );
+    if(err==='DATA_EXISTS') err = "On ne peut pas effacer le Délégué car il est relié à des Services";
+
+    msgModal.show('Erreur', err, 'OK',function(){msgModal.defaultClose();});
+  }
+};
+
+function confirmDeleteModal(delegate)
+{
+  msgModal.show('Effacer', "Voulez-vous vraiment effacer le Délégué Médical "+delegate.firstname+" "+delegate.lastname+"?", 'Effacer',function(){msgModal.defaultClose();doDeleteDelegate(delegate)}, "Annuler", msgModal.defaultClose, true);
+}
 
 
 onMounted(() => {

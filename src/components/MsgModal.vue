@@ -13,7 +13,7 @@
           <button
               v-if="msgModal.buttonLabel1"
               @click="msgModal.onclick1()"
-              :class="['btn', dangerColor || 'btn-primary']"
+              :class="['btn', btnDanger || 'btn-primary']"
           >
             {{ msgModal.buttonLabel1 }}
           </button>
@@ -21,7 +21,7 @@
           <button
               v-if="msgModal.buttonLabel2"
               @click="msgModal.onclick2()"
-              class="btn-base btn-secondary"
+              class="btn btn-secondary"
           >
             {{ msgModal.buttonLabel2 }}
           </button>
@@ -37,7 +37,7 @@
 import { msgModal } from '@/utils/modals/msg-modal.js';
 import {computed} from "vue";
 
-const dangerColor = computed(() => msgModal.danger?'bg-red-600 hover:bg-red-800':'bg-gold hover:bg-darkgold')
+const btnDanger = computed(() => msgModal.danger?'btn-danger':'btn-primary')
 
 </script>
 

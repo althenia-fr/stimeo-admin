@@ -127,6 +127,11 @@
     color: #fff;
 }
 
+.btn-danger{
+    background: #ff4949;
+    color: #fff;
+}
+
 
 .btn-primary:hover:not(:disabled) {
     filter: brightness(1.2);
@@ -192,6 +197,13 @@
 .stimeo-table tbody tr:hover, .data-table tbody tr:hover {
     background: #f8fafc;
 }
+
+td{
+    word-break: break-all;      /* Coupe le texte n'importe où pour forcer le retour à la ligne */
+    overflow-wrap: anywhere;   /* Solution moderne pour permettre la coupure partout */
+    white-space: normal;
+}
+
 
 /* =========================================
    ÉTATS & BADGES

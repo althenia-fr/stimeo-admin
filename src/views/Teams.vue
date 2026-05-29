@@ -43,6 +43,10 @@
             <button class="action-btn edit-btn" @click="teamModal.openEditModal(team)" title="Modifier">
               <font-awesome-icon icon="fa-solid fa-pen"/>
             </button>
+            &nbsp;
+            <button class="action-btn edit-btn" @click="confirmDeleteModal(team)" title="Effacer">
+              <font-awesome-icon icon="fa-solid fa-trash-can"/>
+            </button>
           </td>
         </tr>
         </tbody>
@@ -62,6 +66,9 @@ import {storageService} from "@/utils/storage.js";
 import axios from "axios";
 import {API_BASE_URL} from "@/utils/http.js";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {msgModal} from "@/utils/modals/msg-modal.js";
+import {siteModal} from "@/utils/modals/site-modal.js";
+import {prettyPrintErrorMsg} from "@/utils/error.js";
 
 const isLoadingTable = ref(false);
 const fetchTeams = async () => {
@@ -84,6 +91,50 @@ const fetchTeams = async () => {
   }
 };
 
+const doDeleteTeam = async (team) => {
+
+  try {
+    const payload = {
+      tid: team.tid,
+    };
+
+    let admin = storageService.getItem('admin');
+    let axiosRequestConfig = {
+      headers: {
+        'Content-Type':'application/json; charset=utf-8',
+        'Authorization': 'Basic ' + admin.secret,
+      }
+    }
+
+    // 3. Appel POST Axios standard
+    msgModal.show('Opération en cours', "Veuillez patienter...");
+    const response = await axios.post(API_BASE_URL+'/admin/team/delete', payload,axiosRequestConfig);
+    msgModal.defaultClose();
+
+    if(response.status===200)
+    {
+      if (response.data) teamModal.teams = response.data;
+    }
+    else
+    {
+      msgModal.show('Erreur', "code "+response.status, 'OK',function(){msgModal.defaultClose();teamModal.isOpen = true;});
+    }
+
+  } catch (error) {
+    let err = prettyPrintErrorMsg(error.response)
+    console.error("Erreur:",err );
+    if(err==='DATA_EXISTS') err = "On ne peut pas effacer le Service car son équipe contient des membres";
+    msgModal.show('Erreur', err, 'OK',function(){msgModal.defaultClose();});
+  }
+};
+
+
+
+
+function confirmDeleteModal(team)
+{
+  msgModal.show('Effacer', "Voulez-vous vraiment effacer le Service "+team.name+"?", 'Effacer',function(){msgModal.defaultClose();doDeleteTeam(team)}, "Annuler", msgModal.defaultClose, true);
+}
 
 onMounted(() => {
   fetchTeams();
