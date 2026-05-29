@@ -4,6 +4,7 @@ import Login from '../views/Login.vue';
 import Catalog from '../views/Catalog.vue';
 import BasicLayout from "@/layouts/BasicLayout.vue";
 import {storageService} from "@/utils/storage.js";
+import Delegates from "@/views/Delegates.vue";
 
 const routes = [
     {
@@ -26,7 +27,8 @@ const routes = [
         component: AdminLayout,
         meta: { requiresAuth: true },
         children: [
-            { path: 'catalog', component: Catalog }
+            { path: 'catalog', component: Catalog },
+            { path: 'delegates', component: Delegates }
         ]
     },
     { path: "/:catchAll(.*)", redirect: "/login" },

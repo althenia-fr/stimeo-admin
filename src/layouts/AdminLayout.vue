@@ -6,9 +6,13 @@
       </div>
 
       <nav class="sidebar-menu">
-        <router-link to="/admin/catalog" class="menu-item" active-class="active">
+        <router-link to="/auth/catalog" class="menu-item" active-class="active">
           <font-awesome-icon icon="fa-solid fa-cart-plus"/>
           <span class="label">Catalogue</span>
+        </router-link>
+        <router-link to="/auth/delegates" class="menu-item" active-class="active">
+          <font-awesome-icon icon="fa-solid fa-user"/>
+          <span class="label">Délégués</span>
         </router-link>
       </nav>
 

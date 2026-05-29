@@ -17,7 +17,7 @@
         <input type="password" required />
       </div>
 
-      <button type="submit" class="btn-primary">Mettre à jour</button>
+      <button type="submit" class="btn btn-primary">Mettre à jour</button>
     </form>
 
     <div class="form-footer">

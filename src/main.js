@@ -5,15 +5,15 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { faCartPlus, faSignOut, faMagnifyingGlass, faSpinner
+import { faUser, faCartPlus, faSignOut, faMagnifyingGlass, faSpinner, faUsers, faPen
 } from '@fortawesome/free-solid-svg-icons'
 
-import {faUser, faFolderOpen
+import {faFolderOpen
 } from '@fortawesome/free-regular-svg-icons'
 
 library.add(
-    faUser,faSignOut,faMagnifyingGlass,faSpinner,
-    faCartPlus, faFolderOpen
+    faUser,faCartPlus, faSignOut,faMagnifyingGlass,faSpinner,faUsers, faPen,
+    faFolderOpen
 )
 
 const app = createApp(App);

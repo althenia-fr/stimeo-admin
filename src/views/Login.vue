@@ -14,7 +14,7 @@
         <input type="password" placeholder="••••••••" v-model="password" required />
       </div>
 
-      <button type="submit" class="btn-primary">Se connecter</button>
+      <button type="submit" class="btn btn-primary">Se connecter</button>
     </form>
 
     <div class="form-footer">

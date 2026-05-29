@@ -1,0 +1,226 @@
+/* =========================================
+   LAYOUT GLOBAL (Condensé)
+   ========================================= */
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.5rem 0 2rem 0;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.25rem;
+}
+
+.header-titles h1,
+.header-titles h2.title {
+    margin: 0 0 0.2rem 0;
+    color: var(--stimeo-primary, #2c3e50);
+    font-size: 1.75rem;
+}
+
+.header-titles p,
+.header-titles .subtitle {
+    margin: 0;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   BARRE DE RECHERCHE
+   ========================================= */
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 0.4rem 0.75rem;
+    width: 280px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.search-icon {
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    margin-left: 0.5rem;
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.85rem;
+}
+
+/* =========================================
+   CARTES D'ACTION ET FORMULAIRES
+   ========================================= */
+.action-card {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 1.5rem;
+    border: 1px solid #f1f5f9;
+}
+
+.form-row, .import-form {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.form-group {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row .form-group {
+    flex-grow: 1;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    color: #334155;
+    background: #f8fafc;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    border-color: var(--stimeo-primary, #2c3e50);
+    outline: none;
+}
+
+/* =========================================
+   BOUTONS
+   ========================================= */
+.btn{
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: filter 0.2s;
+}
+
+.btn-primary{
+    background: var(--stimeo-primary);
+    color: #fff;
+}
+
+.btn-secondary{
+    background: #cbd5e1;
+    color: #fff;
+}
+
+
+.btn-primary:hover:not(:disabled) {
+    filter: brightness(1.2);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.action-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.edit-btn {
+    color: var(--stimeo-primary, #2c3e50);
+}
+
+.edit-btn:hover {
+    background: rgba(0,0,0, 0.05);
+}
+
+/* =========================================
+   TABLEAUX DE DONNÉES (Densité optimisée)
+   ========================================= */
+.table-scroll-container, .table-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    overflow-x: auto;
+    border: 1px solid #f1f5f9;
+}
+
+.stimeo-table, .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.825rem;
+}
+
+.stimeo-table th, .data-table th {
+    background: #f8fafc;
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    color: #475569;
+    border-bottom: 2px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+.stimeo-table td, .data-table td {
+    padding: 0.4rem 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+    color: #334155;
+}
+
+.stimeo-table tbody tr:hover, .data-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* =========================================
+   ÉTATS & BADGES
+   ========================================= */
+.ref-badge {
+    background: #f1f5f9;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.8rem;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    font-weight: 500;
+}
+
+.empty-state, .loading-state {
+    text-align: center !important;
+    padding: 3rem 1rem !important;
+    color: #94a3b8 !important;
+}
+
+/* =========================================
+   UTILITAIRES
+   ========================================= */
+.text-center { text-align: center !important; }
+.font-semibold { font-weight: 600; }
+.text-wrap { white-space: normal; }
+.text-truncate {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
