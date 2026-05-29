@@ -14,6 +14,14 @@
           <font-awesome-icon icon="fa-solid fa-user"/>
           <span class="label">Délégués</span>
         </router-link>
+        <router-link to="/auth/sites" class="menu-item" active-class="active">
+          <font-awesome-icon icon="fa-solid fa-house-medical"/>
+          <span class="label">Etablissements</span>
+        </router-link>
+        <router-link to="/auth/teams" class="menu-item" active-class="active">
+          <font-awesome-icon icon="fa-solid fa-user-nurse"/>
+          <span class="label">Services</span>
+        </router-link>
       </nav>
 
       <div class="sidebar-footer">

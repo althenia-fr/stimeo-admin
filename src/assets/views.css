@@ -166,6 +166,7 @@
 }
 
 .stimeo-table, .data-table {
+    table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
     font-size: 0.825rem;
