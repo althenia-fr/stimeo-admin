@@ -5,6 +5,15 @@
         <h2 class="title">Services</h2>
         <p class="subtitle">Gestion des Services</p>
       </div>
+      <div class="search-wrapper">
+        <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="search-icon"/>
+        <input
+            type="text"
+            v-model="searchQuery"
+            placeholder="Rechercher partout..."
+            class="search-input"
+        />
+      </div>
       <button class="btn btn-primary" @click="teamModal.openAddModal">
         <i class="fa-solid fa-plus"></i> Ajouter un Service
       </button>
@@ -28,13 +37,13 @@
             <p>Chargement des données...</p>
           </td>
         </tr>
-        <tr v-if="!isLoadingTable && teamModal.teams.length === 0">
+        <tr v-if="!isLoadingTable && filteredTeams.length === 0">
           <td colspan="5" class="empty-state">
             <i class="fa-solid fa-users-slash"></i>
-            <p>Aucun service enregistré.</p>
+            <p>Pas de données</p>
           </td>
         </tr>
-        <tr v-else v-for="(team, index) in teamModal.teams" :key="index">
+        <tr v-else v-for="(team, index) in filteredTeams" :key="index">
           <td class="font-semibold">{{ team.name }}</td>
           <td>{{ team.etablissement }}</td>
           <td>{{ team.service }} </td>
@@ -59,7 +68,7 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue';
+import {computed, onMounted, ref} from 'vue';
 import TeamModal from "@/components/TeamModal.vue";
 import {teamModal} from "@/utils/modals/team-modal.js";
 import {storageService} from "@/utils/storage.js";
@@ -69,6 +78,22 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {msgModal} from "@/utils/modals/msg-modal.js";
 import {siteModal} from "@/utils/modals/site-modal.js";
 import {prettyPrintErrorMsg} from "@/utils/error.js";
+
+const searchQuery = ref('');
+
+const filteredTeams = computed(() => {
+  const query = searchQuery.value.trim().toLowerCase();
+  if (!query) return teamModal.teams;
+  return teamModal.teams.filter(item => {
+    return (
+        item.etablissement?.toLowerCase().includes(query) ||
+        item.service?.toLowerCase().includes(query) ||
+        item.name?.toLowerCase().includes(query) ||
+        item.delegateName?.toLowerCase().includes(query)
+    );
+  });
+});
+
 
 const isLoadingTable = ref(false);
 const fetchTeams = async () => {

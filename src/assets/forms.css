@@ -1,16 +1,12 @@
-.title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-    text-align: center;
-    color: var(--stimeo-primary);
-}
 
-.subtitle {
-    color: var(--stimeo-text-light);
-    font-size: 0.9rem;
-    text-align: center;
-    margin-bottom: 2rem;
+/* =========================================
+   FORMULAIRES
+   ========================================= */
+
+.form-row, .import-form {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 .form-group {
@@ -20,41 +16,28 @@
     margin-bottom: 1.25rem;
 }
 
-label {
+.form-row .form-group {
+    flex-grow: 1;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    font-family: inherit;
     font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--stimeo-text);
+    color: #334155;
+    background: #f8fafc;
+    transition: border-color 0.2s;
 }
 
-input {
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--stimeo-border);
-    border-radius: 8px;
-    font-size: 0.95rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    background-color: var(--stimeo-surface);
-    color: var(--stimeo-text);
-}
-
-input:focus {
+.form-control:focus {
+    border-color: var(--stimeo-primary, #2c3e50);
     outline: none;
-    border-color: var(--stimeo-primary);
-    box-shadow: 0 0 0 3px rgba(10, 37, 64, 0.08);
 }
 
 .form-footer {
     text-align: center;
     margin-top: 1.5rem;
-}
-
-.link {
-    font-size: 0.85rem;
-    color: var(--stimeo-text-light);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.link:hover {
-    color: var(--stimeo-primary);
-    text-decoration: underline;
 }

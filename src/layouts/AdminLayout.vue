@@ -128,7 +128,7 @@ const logout = () => {
 }
 
 .logout-btn, .menu-item {
-  color: var(--stimeo-primary);
+  color: var(--stimeo-accent);
   text-decoration: none;
   font-size: 0.9rem;
   border: none;

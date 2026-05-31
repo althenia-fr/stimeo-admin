@@ -20,7 +20,7 @@
 
     <div class="action-card">
       <form @submit.prevent="handleImport" class="import-form">
-        <div class="form-group manufacturer-group">
+        <div class="action-bar-group manufacturer-group">
           <select id="manufacturer" v-model="selectedManufacturer" required class="form-control">
             <option value="" disabled selected>Indiquer le fournisseur</option>
             <option value="Manfred Sauer">Manfred Sauer</option>
@@ -33,7 +33,7 @@
           </select>
         </div>
 
-        <div class="form-group" style="flex: 1;">
+        <div class="action-bar-group" style="flex: 1;">
           <input type="file" id="file" class="form-control" accept=".csv, .json, .pdf, .xls, .xslx" @change="handleFileChange" required />
         </div>
 
@@ -52,11 +52,10 @@
           <th style="width: 15%;">Fournisseur</th>
           <th style="width: 15%;">Référence</th>
           <th style="width: 25%;">Libellé</th>
-          <th style="width: 5%;">Qté</th>
+          <th style="width: 10%;">Qté</th>
           <th style="width: 10%; text-align: center;">LPP</th>
           <th style="width: 10%;">LPP Loc</th>
           <th style="width: 10%; text-align: center;">ACL</th>
-          <th style="width: 10%; text-align: center;">EAN-13</th>
         </tr>
         </thead>
         <tbody>
@@ -75,7 +74,6 @@
             <td class="text-center">{{ item.lpp }}</td>
             <td class="text-wrap">{{ item.lpprent }}</td>
             <td class="text-center">{{ item.acl }}</td>
-            <td class="text-center">{{ item.ean13 }}</td>
           </tr>
         </template>
         <tr v-else>
@@ -206,5 +204,23 @@ onMounted(() => {
 </script>
 
 <style scoped>
-@import '../assets/views.css'; /* On garde l'import global au cas où */
+@import '../assets/views.css';
+@import '../assets/forms.css';
+
+
+.action-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+  border: 1px solid #f1f5f9;
+}
+
+.action-bar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 </style>

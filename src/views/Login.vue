@@ -6,19 +6,19 @@
     <form @submit.prevent="handleLogin">
       <div class="form-group">
         <label>Identifiant</label>
-        <input type="email" placeholder="nom@stimeo.care" v-model="email" required />
+        <input type="email" placeholder="nom@stimeo.care" v-model="email"  class="form-control" required />
       </div>
 
       <div class="form-group">
         <label>Mot de passe</label>
-        <input type="password" placeholder="••••••••" v-model="password" required />
+        <input type="password" placeholder="••••••••" v-model="password"  class="form-control" required />
       </div>
 
-      <button type="submit" class="btn btn-primary">Se connecter</button>
+      <button type="submit" class="btn btn-primary" style="margin: auto;display: block">Se connecter</button>
     </form>
 
     <div class="form-footer">
-      <router-link to="/change-password" class="link">Mot de passe oublié ou à modifier ?</router-link>
+      <router-link to="/change-password" class="link">Changer le Mot de passe</router-link>
     </div>
   </div>
 </template>
@@ -65,4 +65,5 @@ const handleLogin = async () => {
 
 <style scoped>
 @import '../assets/forms.css';
+@import '../assets/views.css';
 </style>
