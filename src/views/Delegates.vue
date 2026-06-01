@@ -31,7 +31,7 @@
         <tr v-if="!isLoadingTable && delegateModal.delegates.length === 0">
           <td colspan="6" class="empty-state">
             <i class="fa-solid fa-users-slash"></i>
-            <p>Aucun délégué enregistré.</p>
+            <p>Pas de données</p>
           </td>
         </tr>
         <tr v-else v-for="(delegate, index) in delegateModal.delegates" :key="index">

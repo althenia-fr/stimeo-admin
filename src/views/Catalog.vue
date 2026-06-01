@@ -38,7 +38,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary" :disabled="isUploading">
-          <i v-if="isUploading" class="fa-solid fa-spinner fa-spin"></i>
+          <font-awesome-icon v-if="isUploading" icon="fa-solid fa-spinner" class="fa-spin"></font-awesome-icon>
           <i v-else class="fa-solid fa-cloud-arrow-up"></i>
           <span>Importer</span>
         </button>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <img src="/stimeo_logo.png" alt="stimeo logo" width="100" style="display:block; margin: auto">
-    <p class="subtitle">Console d'administration</p>
+    <p class="subtitle" style="display: block;margin:  0 auto 2rem auto;width: fit-content">Console d'administration</p>
 
     <form @submit.prevent="handleLogin">
       <div class="form-group">
@@ -13,6 +13,9 @@
         <label>Mot de passe</label>
         <input type="password" placeholder="••••••••" v-model="password"  class="form-control" required />
       </div>
+
+      <p v-html="errorMsg" class="error">
+      </p>
 
       <button type="submit" class="btn btn-primary" style="margin: auto;display: block">Se connecter</button>
     </form>
@@ -30,33 +33,46 @@ import {API_BASE_URL} from "@/utils/http.js";
 import {storageService} from "@/utils/storage.js";
 import {ref} from "vue";
 import {goTo} from "@/router/router.js";
+import {prettyPrintErrorMsg} from "@/utils/error.js";
 const router = useRouter();
 
 const email = ref('');
 const password = ref('');
+const errorMsg = ref('&nbsp;');
 
 const handleLogin = async () => {
 
-  // 2. On construit le payload JSON classique
-  const payload = {
-    email: email.value,
-    password: password.value,
-  };
+  try {
 
-  let axiosRequestConfig = {
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-    }
-  }
+      const payload = {
+        email: email.value,
+        password: password.value,
+      };
 
-  // 3. Appel POST Axios standard (le Content-Type passe automatiquement en application/json)
-  const response = await axios.post(API_BASE_URL + '/admin/login', payload, axiosRequestConfig);
+      let axiosRequestConfig = {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        }
+      }
 
-  if (response.status === 200) {
+      errorMsg.value = '&nbsp;'
 
-    let admin = response.data;
-    storageService.setItem('admin', admin);
-    goTo('/auth/catalog')
+      // 3. Appel POST Axios standard (le Content-Type passe automatiquement en application/json)
+      const response = await axios.post(API_BASE_URL + '/admin/login', payload, axiosRequestConfig);
+
+      if (response.status === 200) {
+
+        let admin = response.data;
+        storageService.setItem('admin', admin);
+        goTo('/auth/catalog')
+
+      }
+
+  } catch (error) {
+
+    let err = prettyPrintErrorMsg(error.response)
+    if(err==='BAD_CREDENTIALS') err = "mauvais identifiants"
+    errorMsg.value = err
 
   }
 
@@ -66,4 +82,12 @@ const handleLogin = async () => {
 <style scoped>
 @import '../assets/forms.css';
 @import '../assets/views.css';
+
+.error{
+  color: var(--stimeo-danger);
+  display: block;
+  margin: -10px auto 10px auto;
+  width: fit-content;
+}
+
 </style>

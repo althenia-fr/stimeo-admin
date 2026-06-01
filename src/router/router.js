@@ -7,6 +7,8 @@ import {storageService} from "@/utils/storage.js";
 import Delegates from "@/views/Delegates.vue";
 import Sites from "@/views/Sites.vue";
 import Teams from "@/views/Teams.vue";
+import Pecs from "@/views/Pecs.vue";
+import TeamMembers from "@/views/TeamMembers.vue";
 
 const routes = [
     {
@@ -33,6 +35,8 @@ const routes = [
             { path: 'delegates', component: Delegates },
             { path: 'sites', component: Sites },
             { path: 'teams', component: Teams },
+            { path: 'pecs', component: Pecs },
+            { path: 'teams/:tid', name:'members', component: TeamMembers, props: true },
         ]
     },
     { path: "/:catchAll(.*)", redirect: "/login" },

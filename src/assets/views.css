@@ -38,7 +38,6 @@
 .subtitle {
     color: var(--stimeo-text-light);
     font-size: 0.9rem;
-    text-align: center;
     margin-bottom: 2rem;
 }
 
@@ -116,7 +115,7 @@ label {
 }
 
 .btn-danger{
-    background: #ff4949;
+    background: var(--stimeo-danger);
     color: #fff;
 }
 
@@ -187,7 +186,7 @@ label {
 }
 
 td{
-    word-break: break-all;      /* Coupe le texte n'importe où pour forcer le retour à la ligne */
+    word-break: break-word;      /* Coupe le texte pour forcer le retour à la ligne */
     overflow-wrap: anywhere;   /* Solution moderne pour permettre la coupure partout */
     white-space: normal;
 }
@@ -211,6 +210,11 @@ td{
     text-align: center !important;
     padding: 3rem 1rem !important;
     color: #94a3b8 !important;
+}
+
+.clickable:hover {
+    cursor: pointer !important;
+    text-decoration: underline;
 }
 
 /* =========================================

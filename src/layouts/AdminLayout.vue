@@ -41,6 +41,11 @@
           </div>
         </div>
 
+        <router-link to="/auth/pecs" class="menu-item" active-class="active">
+          <font-awesome-icon icon="fa-solid fa-hand-holding-medical"/>
+          <span class="label">Prises en charge</span>
+        </router-link>
+
       </nav>
 
       <div class="sidebar-footer">

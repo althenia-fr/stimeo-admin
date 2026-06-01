@@ -12,7 +12,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: var(--stimeo-bg);
+  background-color: #f8fafc;
 }
 .auth-card {
   background: var(--stimeo-bg);

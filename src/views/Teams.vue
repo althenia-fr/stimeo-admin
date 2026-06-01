@@ -44,7 +44,7 @@
           </td>
         </tr>
         <tr v-else v-for="(team, index) in filteredTeams" :key="index">
-          <td class="font-semibold">{{ team.name }}</td>
+          <td class="font-semibold clickable" @click="goToTeamMembers(team.tid)">{{ team.name }}</td>
           <td>{{ team.etablissement }}</td>
           <td>{{ team.service }} </td>
           <td>{{ team.delegateName }}</td>
@@ -76,8 +76,8 @@ import axios from "axios";
 import {API_BASE_URL} from "@/utils/http.js";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {msgModal} from "@/utils/modals/msg-modal.js";
-import {siteModal} from "@/utils/modals/site-modal.js";
 import {prettyPrintErrorMsg} from "@/utils/error.js";
+import router from "@/router/router.js";
 
 const searchQuery = ref('');
 
@@ -154,11 +154,17 @@ const doDeleteTeam = async (team) => {
 };
 
 
-
-
 function confirmDeleteModal(team)
 {
   msgModal.show('Effacer', "Voulez-vous vraiment effacer le Service "+team.name+"?", 'Effacer',function(){msgModal.defaultClose();doDeleteTeam(team)}, "Annuler", msgModal.defaultClose, true);
+}
+
+function goToTeamMembers(tid)
+{
+  router.push({
+    name: 'members',
+    params: { tid: tid }
+  });
 }
 
 onMounted(() => {

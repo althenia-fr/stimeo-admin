@@ -31,7 +31,7 @@
         <tr v-if="!isLoadingTable && siteModal.sites.length === 0">
           <td colspan="5" class="empty-state">
             <i class="fa-solid fa-users-slash"></i>
-            <p>Aucun établissement enregistré.</p>
+            <p>Pas de données</p>
           </td>
         </tr>
         <tr v-else v-for="(site, index) in siteModal.sites" :key="index">
