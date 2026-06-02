@@ -3,7 +3,7 @@
     <div v-if="delegateModal.isOpen" class="modal-overlay" @click.self="delegateModal.defaultClose">
       <div class="modal-content">
         <div class="modal-header">
-          <h3>{{ delegateModal.isEditing ? 'Modifier le délégué' : 'Nouveau délégué' }}</h3>
+          <h3>{{ delegateModal.isEditing ? 'Modifier le Délégué' : 'Nouveau Délégué' }}</h3>
         </div>
 
         <form @submit.prevent="saveDelegate">

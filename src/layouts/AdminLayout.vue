@@ -46,6 +46,11 @@
           <span class="label">Prises en charge</span>
         </router-link>
 
+        <router-link to="/auth/patients" class="menu-item" active-class="active">
+          <font-awesome-icon icon="fa-solid fa-bed"/>
+          <span class="label">Patients</span>
+        </router-link>
+
       </nav>
 
       <div class="sidebar-footer">

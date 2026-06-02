@@ -6,7 +6,7 @@
         <p class="subtitle">Gestion des Délégués Médicaux</p>
       </div>
       <button class="btn btn-primary" @click="delegateModal.openAddModal">
-        <i class="fa-solid fa-plus"></i> Ajouter un Délégué
+        <font-awesome-icon icon="fa-solid fa-plus"/> Ajouter un Délégué
       </button>
     </div>
 
@@ -23,13 +23,13 @@
         </thead>
         <tbody>
         <tr v-if="isLoadingTable">
-          <td colspan="6" class="empty-state">
+          <td colspan="5" class="empty-state">
             <font-awesome-icon icon="fa-solid fa-spinner" class="fa-spin" style="font-size: 1.5rem; margin-bottom: 10px;" />
             <p>Chargement des données...</p>
           </td>
         </tr>
         <tr v-if="!isLoadingTable && delegateModal.delegates.length === 0">
-          <td colspan="6" class="empty-state">
+          <td colspan="5" class="empty-state">
             <i class="fa-solid fa-users-slash"></i>
             <p>Pas de données</p>
           </td>

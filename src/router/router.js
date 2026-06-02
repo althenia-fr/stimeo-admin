@@ -9,6 +9,7 @@ import Sites from "@/views/Sites.vue";
 import Teams from "@/views/Teams.vue";
 import Pecs from "@/views/Pecs.vue";
 import TeamMembers from "@/views/TeamMembers.vue";
+import Patients from "@/views/Patients.vue";
 
 const routes = [
     {
@@ -37,6 +38,8 @@ const routes = [
             { path: 'teams', component: Teams },
             { path: 'pecs', component: Pecs },
             { path: 'teams/:tid', name:'members', component: TeamMembers, props: true },
+            { path: 'patients', component: Patients },
+
         ]
     },
     { path: "/:catchAll(.*)", redirect: "/login" },

@@ -6,7 +6,7 @@
         <p class="subtitle">Gestion des Etablissements de soin</p>
       </div>
       <button class="btn btn-primary" @click="siteModal.openAddModal">
-        <i class="fa-solid fa-plus"></i> Ajouter un Etablissement
+        <font-awesome-icon icon="fa-solid fa-plus"/> Ajouter un Etablissement
       </button>
     </div>
 
