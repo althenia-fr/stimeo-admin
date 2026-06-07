@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="page-header">
       <div class="header-titles">
-        <h2 class="title">Délégués</h2>
+        <h2 class="title"><font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/> Délégués Stimeo</h2>
         <p class="subtitle">Gestion des Délégués Médicaux</p>
       </div>
       <button class="btn btn-primary" @click="delegateModal.openAddModal">
@@ -66,9 +66,13 @@ import {storageService} from "@/utils/storage.js";
 import axios from "axios";
 import {API_BASE_URL} from "@/utils/http.js";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import {siteModal} from "@/utils/modals/site-modal.js";
 import {msgModal} from "@/utils/modals/msg-modal.js";
 import {prettyPrintErrorMsg} from "@/utils/error.js";
+import router from "@/router/router.js";
+
+const goBack = () => {
+  router.back()
+}
 
 const isLoadingTable = ref(false);
 const fetchDelegates = async () => {

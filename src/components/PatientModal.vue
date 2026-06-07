@@ -24,7 +24,7 @@
 
               <div class="form-group">
                 <label>NIR</label>
-                <input type="text" v-model="patientModal.form.nir" required class="form-control" />
+                <input type="text" v-model="patientModal.form.nir" class="form-control" />
               </div>
 
 
@@ -32,26 +32,26 @@
 
                 <div class="form-group">
                   <label>Nom</label>
-                  <input type="text" v-model="patientModal.form.lastname" required class="form-control" />
+                  <input type="text" v-model="patientModal.form.lastname" class="form-control" />
                 </div>
                 <div class="form-group">
                   <label>Prénom</label>
-                  <input type="text" v-model="patientModal.form.firstname" required class="form-control" />
+                  <input type="text" v-model="patientModal.form.firstname" class="form-control" />
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
                   <label>Civilité</label>
-                  <select  v-model="patientModal.form.gender" required class="form-control">
-                    <option value="" disabled selected>Indiquer la Civilité</option>
-                    <option :value=1>Homme</option>
-                    <option :value=2>Femme</option>
+                  <select  v-model="patientModal.form.gender" class="form-control">
+                    <option :value=0 disabled>Choisissez...</option>
+                    <option :value=1>Monsieur</option>
+                    <option :value=2>Madame</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label>Date Naissance</label>
-                  <input type="text" v-model="patientModal.form.localeBirthdate" required class="form-control" />
+                  <input type="text" v-model="patientModal.form.localeBirthdate" placeholder="JJ/MM/AAAA" class="form-control" />
                 </div>
               </div>
 
@@ -61,7 +61,7 @@
             <div v-if="patientModal.activeTab === 'contact'">
               <div class="form-group">
                 <label>Email</label>
-                <input type="email" v-model="patientModal.form.email" required class="form-control" />
+                <input type="email" v-model="patientModal.form.email" class="form-control" />
               </div>
               <div class="form-group">
                 <label>Mobile</label>
@@ -100,17 +100,20 @@
                 <input type="text" v-model="patientModal.form.helper.name" placeholder="Prénom + Nom de l'aidant" class="form-control" />
               </div>
               <div class="form-group">
-                <label>Mobile</label>
-                <input type="tel" v-model="patientModal.form.helper.phone" placeholder="Mobile de l'aidant" class="form-control" />
-              </div>
-              <div class="form-group">
                 <label>Email</label>
-                <input type="email" v-model="patientModal.form.helper.email" placeholder="Email de l'aidant" class="form-control" />
+                <input type="email" v-model="patientModal.form.helper.email" placeholder="email@domaine.com" class="form-control" />
               </div>
-              <div class="form-group">
-                <label>Lien avec le patient</label>
-                <input type="text" v-model="patientModal.form.helper.relationship" placeholder="Lien avec le Patient" class="form-control" />
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Mobile</label>
+                  <input type="tel" v-model="patientModal.form.helper.phone" placeholder="06 ou 07..." class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label>Lien avec le patient</label>
+                  <input type="text" v-model="patientModal.form.helper.relationship" placeholder="Ex: parent, ami , etc..." class="form-control" />
+                </div>
               </div>
+
             </div>
           </div>
 
@@ -169,7 +172,7 @@ const savePatient = async () => {
   } catch (error) {
     let err = prettyPrintErrorMsg(error.response)
     console.error("Erreur:",err );
-    if(err==='EMAIL_EXISTS') err = 'Cet email existe déjà';
+    if(err==='EMAIL_EXISTS') err = 'Un patient existe déjà avec cet email';
     else if(err==='PHONE_EXISTS') err = 'Un patient existe déjà avec ce numéro de téléphone';
     else if(err==='BAD_MSISDN') err = 'Le numéro de téléphone a un mauvais format. Il doit commencer par 06 ou 07 et avoir 10 chiffres en tout';
 
@@ -184,34 +187,6 @@ const savePatient = async () => {
 @import '../assets/modal.css';
 @import '../assets/views.css';
 @import '../assets/forms.css';
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-
-.tabs-nav {
-  display: flex;
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 20px;
-}
-
-.tabs-nav button {
-  padding: 10px 20px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-}
-
-.tabs-nav button.active {
-  border-bottom-color: var(--stimeo-primary);
-  color: var(--stimeo-primary);
-  font-weight: bold;
-}
-
-.tabs-content {
-  min-height: 250px;
-}
+@import '../assets/tabnav.css';
 
 </style>

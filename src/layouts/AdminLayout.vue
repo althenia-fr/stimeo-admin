@@ -11,7 +11,7 @@
           <span class="label">Catalogue</span>
         </router-link>
 
-        <div class="menu-group">
+        <div>
           <div
               class="menu-item group-title"
               @click="toggleOrganisation"
@@ -24,7 +24,7 @@
           <div class="sub-menu" v-show="isOrganisationOpen">
 
             <router-link to="/auth/delegates" class="menu-item" active-class="active">
-              <font-awesome-icon icon="fa-solid fa-user"/>
+              <img src="/favicon.ico" width="17px"/>
               <span class="label">Délégués</span>
             </router-link>
 
@@ -34,7 +34,7 @@
             </router-link>
 
             <router-link to="/auth/teams" class="menu-item" active-class="active">
-              <font-awesome-icon icon="fa-solid fa-user-nurse"/>
+              <font-awesome-icon icon="fa-solid fa-users"/>
               <span class="label">Services</span>
             </router-link>
 
@@ -49,6 +49,11 @@
         <router-link to="/auth/patients" class="menu-item" active-class="active">
           <font-awesome-icon icon="fa-solid fa-bed"/>
           <span class="label">Patients</span>
+        </router-link>
+
+        <router-link to="/auth/idels" class="menu-item" active-class="active">
+          <font-awesome-icon icon="fa-solid fa-user-nurse"/>
+          <span class="label">Idels</span>
         </router-link>
 
       </nav>

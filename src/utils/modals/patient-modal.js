@@ -5,7 +5,7 @@ export const patientModal = reactive({
     isOpen: false,
     isEditing : false,
     activeTab : 'identity',
-    form: { uid: null,  nir:'', lastname: '', localBirthdate:'', firstname: '', email: '', mobile: '', address:{}, helper:{} },
+    form: { uid: null,  nir:'', gender:0, lastname: '', localBirthdate:'', firstname: '', email: '', mobile: '', address:{}, helper:{} },
 
     // Actions pour modifier l'état
     show() {
@@ -21,7 +21,7 @@ export const patientModal = reactive({
         this.activeTab = 'identity';
         this.isEditing = false;
         this.editIndex = -1;
-        this.form = { uid: null,  nir:'', lastname: '', localBirthdate:'', firstname: '', email: '', mobile: '', address:{}, helper:{} };
+        this.form = { uid: null,  nir:'', gender:0, lastname: '', localBirthdate:'', firstname: '', email: '', mobile: '', address:{}, helper:{} };
         patientModal.isOpen = true;
     },
 

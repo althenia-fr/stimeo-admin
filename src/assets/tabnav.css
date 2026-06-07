@@ -1,0 +1,23 @@
+.tabs-nav {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.tabs-nav button {
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tabs-nav button.active {
+    border-bottom-color: var(--stimeo-primary);
+    color: var(--stimeo-primary);
+    font-weight: bold;
+}
+
+.tabs-content {
+    min-height: 250px;
+}

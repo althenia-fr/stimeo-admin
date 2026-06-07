@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="page-header">
       <div class="header-titles">
-        <h2 class="title">Membres</h2>
+        <h2 class="title"><font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/> Membres</h2>
         <p class="subtitle">Membres du service {{team.service}}, {{team.name}}</p>
       </div>
     </div>
@@ -49,8 +49,11 @@ import {storageService} from "@/utils/storage.js";
 import axios from "axios";
 import {API_BASE_URL} from "@/utils/http.js";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import router from "@/router/router.js";
 
-// Récupération directe du paramètre de l'URL grâce à 'props: true' dans le router
+const goBack = () => {
+  router.back()
+}
 
 const props = defineProps({
   tid: {

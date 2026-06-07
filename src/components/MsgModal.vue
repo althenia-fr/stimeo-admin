@@ -5,7 +5,7 @@
       <div class="modal-content">
         <h3>{{ msgModal.title }}</h3>
 
-        <p class="modal-message" v-html="msgModal.message"></p>
+        <p class="modal-message" style="text-align: justify;" v-html="msgModal.message"></p>
 
         <hr class="modal-divider" v-if="msgModal.buttonLabel1"/>
 
@@ -45,4 +45,5 @@ const btnDanger = computed(() => msgModal.danger?'btn-danger':'btn-primary')
 <style scoped>
 @import '../assets/modal.css';
 @import '../assets/views.css';
+
 </style>

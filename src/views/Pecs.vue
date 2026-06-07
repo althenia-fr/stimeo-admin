@@ -1,9 +1,10 @@
 <template>
   <div class="page-container">
+
     <div class="page-header">
       <div class="header-titles">
-        <h2 class="title">Prises en charge</h2>
-        <p class="subtitle">Suivi des Prises en charge</p>
+        <h2 class="title"><font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/> Prises en charge</h2>
+        <p class="subtitle">Gestion des Prises en charge</p>
       </div>
       <div class="search-wrapper">
         <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="search-icon"/>
@@ -14,7 +15,12 @@
             class="search-input"
         />
       </div>
+      <button class="btn btn-primary" @click="ctaStimeoConnect">
+        <font-awesome-icon icon="fa-solid fa-plus"/> Ajouter une PEC
+      </button>
     </div>
+
+
 
     <div class="table-container">
       <table class="data-table">
@@ -48,14 +54,14 @@
           <td>{{ pec.doctorName }}</td>
           <td>{{ pec.protocol }} </td>
           <td>{{ pec.installLabel }}</td>
-          <td @click="idelModal.openModal(pec)" :class="canOpenIdelModal(pec)?'clickable':''">{{ pec.idelStatus }}</td>
+          <td @click="idelAptModal.openModal(pec)" :class="canOpenIdelAptModal(pec)?'clickable':''">{{ pec.idelStatus }}</td>
           <td>{{ pec.depositLabel }}</td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <IdelModal @pec-updated="fetchPecs"/>
+  <IdelAptModal @pec-updated="fetchPecs"/>
 </template>
 
 <script setup>
@@ -64,8 +70,15 @@ import {storageService} from "@/utils/storage.js";
 import axios from "axios";
 import {API_BASE_URL} from "@/utils/http.js";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import IdelModal from "@/components/IdelModal.vue";
-import {canOpenIdelModal, idelModal} from "@/utils/modals/idel-modal.js";
+import IdelAptModal from "@/components/IdelAptModal.vue";
+import {canOpenIdelAptModal, idelAptModal} from "@/utils/modals/idel-apt-modal.js";
+import router from "@/router/router.js";
+import {msgModal} from "@/utils/modals/msg-modal.js";
+import {delegateModal} from "@/utils/modals/delegate-modal.js";
+
+const goBack = () => {
+  router.back()
+}
 
 const searchQuery = ref('');
 const pecs = ref([])
@@ -104,6 +117,15 @@ const fetchPecs = async () => {
     isLoadingTable.value = false;
   }
 };
+
+function ctaStimeoConnect()
+{
+  let msg = "Pour créer une nouvelle Prise en Charge, utilisez Stimeo Connect.<br/><br/> " +
+      "Vous pouvez créer le Patient au préalable ici dans l'Admin.<br/><br/> " +
+      "Eventuellement, créez-le profil IDEL ici dans l'Admin. Une invitation SMS sera envoyée à l'IDEL pour installer l'App Thérésa. " +
+      "Quand vous remplirez la PEC dans Stimeo Connect, veillez bien à mettre le numéro mobile de l'IDEL pour faire le lien avec son profil."
+  msgModal.show('Utilisez Stimeo Connect', msg, 'OK',msgModal.defaultClose);
+}
 
 onMounted(() => {
   fetchPecs();

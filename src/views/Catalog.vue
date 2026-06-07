@@ -1,10 +1,9 @@
 <template>
   <div class="page-container">
-
     <div class="page-header">
       <div class="header-titles">
-        <h1>Catalogue</h1>
-        <p>Gestion des références fournisseurs</p>
+        <h2 class="title"><font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/> Catalogue</h2>
+        <p class="subtitle">Gestion des références fournisseurs</p>
       </div>
 
       <div class="search-wrapper">
@@ -97,6 +96,11 @@ import {msgModal} from "@/utils/modals/msg-modal.js";
 import {API_BASE_URL} from "@/utils/http.js";
 import {storageService} from "@/utils/storage.js";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import router from "@/router/router.js";
+
+const goBack = () => {
+  router.back()
+}
 
 const selectedManufacturer = ref('');
 const selectedFile = ref(null);
