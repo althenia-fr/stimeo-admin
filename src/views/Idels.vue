@@ -152,7 +152,7 @@ const doDeleteIdel = async (idel) => {
     }
     else
     {
-      msgModal.show('Erreur', "code "+response.status, 'OK',function(){msgModal.defaultClose();idelMgtAptModal.isOpen = true;});
+      msgModal.show('Erreur', "code "+response.status, 'OK',function(){msgModal.defaultClose();});
     }
 
   } catch (error) {

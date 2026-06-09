@@ -17,11 +17,84 @@ export function openModal(pec){
     else if(pec.idelStatus==='à valider') idelMgtReviewModal.open(pec.pecid);
     else if(pec.idelStatus.startsWith('medicalib'))
     {
-        msgModal.show('Gestion Medicalib','modal à faire', 'OK', msgModal.defaultClose);
+        //either canceled or pending (allocated handled by 'rdv' use case above)
+        //1. if pending, we can cancel
+        if(pec.idelStatus.indexOf('pending'))
+        {
+            msgModal.show('Arrêt Medicalib','Voulez-vous vraiment interrompre la recherche en cours?', 'Oui, interrompre', function(){medicalibCancel(pec)}, 'Non, continuer', msgModal.defaultClose, true);
+        }
+        //2.if canceled we can allocate manually a new IDEL or restart medicalib
+        else if(pec.idelStatus.indexOf('canceled')) doStartOver(pec);
     }
-    //else if(pec.idelStatus.indexOf('echec')>-1) idelStartModal.open(pec.pecid);
-
+    else if(pec.idelStatus.indexOf('echec')>-1) doStartOver(pec);
 }
+
+function doStartOver(pec)
+{
+    msgModal.show("Recherche d'IDEL","Voulez-vous choisir un(e) IDEL ou relancer Medicalib?", 'Choisir', function(){idelMgtAptModal.open(pec.pecid);},'Medicalib',function(){medicalibStartover(pec);}, false, '#b7AA40');
+}
+
+async function medicalibStartover(pec)
+{
+    try {
+
+        const payload = {
+            pecid: pec.pecid,
+        };
+
+        let admin = storageService.getItem('admin');
+        let axiosRequestConfig = {
+            headers: {
+                'Content-Type':'application/json; charset=utf-8',
+                'Authorization': 'Basic ' + admin.secret,
+            }
+        }
+
+        // 3. Appel POST Axios standard
+        msgModal.show('Opération en cours', "Veuillez patienter...");
+        const response = await axios.post(API_BASE_URL+'/admin/pec/medicalib/start', payload,axiosRequestConfig);
+        msgModal.defaultClose();
+        msgModal.show("Succès","La recherche Medicalib a été relancée", 'OK', function(){msgModal.defaultClose();window.location.reload();});
+
+
+    } catch (error) {
+        msgModal.defaultClose();
+        msgModal.show("Erreur","La recherche Medicalib n'a pas été relancée", 'OK', msgModal.defaultClose);
+        console.log("error whilst fetching idel data", error);
+    }
+}
+
+
+async function medicalibCancel(pec)
+{
+    try {
+
+        const payload = {
+            pecid: pec.pecid,
+        };
+
+        let admin = storageService.getItem('admin');
+        let axiosRequestConfig = {
+            headers: {
+                'Content-Type':'application/json; charset=utf-8',
+                'Authorization': 'Basic ' + admin.secret,
+            }
+        }
+
+        // 3. Appel POST Axios standard
+        msgModal.show('Opération en cours', "Veuillez patienter...");
+        const response = await axios.post(API_BASE_URL+'/admin/pec/medicalib/cancel', payload,axiosRequestConfig);
+        msgModal.defaultClose();
+        msgModal.show("Succès","La recherche Medicalib a été annulée", 'OK', function(){msgModal.defaultClose();window.location.reload();});
+
+    } catch (error) {
+        msgModal.defaultClose();
+        msgModal.show("Erreur","La recherche Medicalib n'a pas été annulée", 'OK', msgModal.defaultClose);
+        console.log("error whilst fetching idel data", error);
+    }
+}
+
+
 
 export const fetchIdelMgtModalData = async (pecid) => {
     idelMgtAptModal.isLoadingData = true;

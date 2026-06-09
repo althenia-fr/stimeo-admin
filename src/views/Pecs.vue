@@ -33,6 +33,7 @@
           <th>Statut</th>
           <th>Idel</th>
           <th>Caution</th>
+          <th class="text-center">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -56,6 +57,11 @@
           <td>{{ pec.installLabel }}</td>
           <td @click="openModal(pec)" :class="pec.protocol?'clickable':''">{{ pec.idelStatus }}</td>
           <td>{{ pec.depositLabel }}</td>
+          <td class="text-center">
+            <button class="action-btn edit-btn" @click="confirmDeleteModal(pec)" title="Effacer">
+              <font-awesome-icon icon="fa-solid fa-trash-can"/>
+            </button>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -78,6 +84,7 @@ import {openModal} from "@/utils/idel.js";
 
 import IdelMgtAptModal from "@/components/modals/IdelMgtAptModal.vue";
 import IdelMgtReviewModal from "@/components/modals/IdelMgtReviewModal.vue";
+import {prettyPrintErrorMsg} from "@/utils/error.js";
 
 const goBack = () => {
   router.back()
@@ -130,6 +137,52 @@ function ctaStimeoConnect()
       "Eventuellement, créez-le profil IDEL ici dans l'Admin. Une invitation SMS sera envoyée à l'IDEL pour installer l'App Thérésa. " +
       "Quand vous remplirez la PEC dans Stimeo Connect, veillez bien à mettre le numéro mobile de l'IDEL pour faire le lien avec son profil."
   msgModal.show('Utilisez Stimeo Connect', msg, 'OK',msgModal.defaultClose);
+}
+
+
+const doDeletePec = async (pec) => {
+
+  try {
+    const payload = {
+      pecid: pec.pecid,
+    };
+
+    let admin = storageService.getItem('admin');
+    let axiosRequestConfig = {
+      headers: {
+        'Content-Type':'application/json; charset=utf-8',
+        'Authorization': 'Basic ' + admin.secret,
+      }
+    }
+
+    // 3. Appel POST Axios standard
+    msgModal.show('Opération en cours', "Veuillez patienter...");
+    const response = await axios.post(API_BASE_URL+'/admin/pec/delete', payload,axiosRequestConfig);
+    msgModal.defaultClose();
+
+    if(response.status===200)
+    {
+      if (response.data) pecs.value = response.data;
+    }
+    else
+    {
+      msgModal.show('Erreur', "code "+response.status, 'OK',function(){msgModal.defaultClose();});
+    }
+
+  } catch (error) {
+    let err = prettyPrintErrorMsg(error.response)
+    console.error("Erreur:",err );
+    if(err==='DATA_EXISTS') err = "On ne peut pas effacer la Pec car elle a commencé à être traitée.";
+
+    msgModal.show('Erreur', err, 'OK',function(){msgModal.defaultClose();});
+  }
+};
+
+
+
+function confirmDeleteModal(pec)
+{
+  msgModal.show('Effacer', "Voulez-vous vraiment effacer la PEC pour "+pec.patientName+"?", 'Effacer',function(){msgModal.defaultClose();doDeletePec(pec)}, "Annuler", msgModal.defaultClose, true);
 }
 
 onMounted(() => {

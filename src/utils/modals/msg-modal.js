@@ -11,9 +11,10 @@ export const msgModal = reactive({
     buttonLabel2: null,
     onclick2: null,
     danger: false,
+    button2Color: null,
 
     // Actions pour modifier l'état
-    show(title , message, buttonLabel1, onclick1, buttonLabel2, onclick2, danger) {
+    show(title , message, buttonLabel1, onclick1, buttonLabel2, onclick2, danger, button2Color) {
         this.title = title;
         this.message = message;
         this.isOpen = true;
@@ -22,6 +23,7 @@ export const msgModal = reactive({
         this.buttonLabel2 = buttonLabel2
         this.onclick2 = onclick2
         this.danger = danger
+        this.button2Color = button2Color
     },
 
     updateMsg(message)

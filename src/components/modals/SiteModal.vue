@@ -24,7 +24,7 @@
 
           <div class="form-group">
             <label>Complement d'adresse</label>
-            <input type="text" v-model="siteModal.form.address2" required placeholder="Complément" class="form-control" />
+            <input type="text" v-model="siteModal.form.address2" placeholder="Complément" class="form-control" />
           </div>
 
           <div class="form-row">
@@ -40,7 +40,7 @@
 
           <div class="form-group">
             <label>Téléphone</label>
-            <input type="text" v-model="siteModal.form.phone" required placeholder="optionnel" class="form-control" />
+            <input type="text" v-model="siteModal.form.phone" placeholder="optionnel" class="form-control" />
           </div>
 
 

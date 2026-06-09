@@ -12,6 +12,7 @@
         <thead>
         <tr>
           <th>Nom</th>
+          <th>Admin</th>
           <th>Role</th>
           <th >Téléphone</th>
           <th >Email</th>
@@ -32,6 +33,7 @@
         </tr>
         <tr v-else v-for="(teamMember, index) in teamMembers" :key="index">
           <td class="font-semibold">{{teamMember.role===1?'Dr ':''}}{{ teamMember.firstname }} {{ teamMember.lastname }}</td>
+          <td>{{ teamMember.isAdmin?'oui':'-' }}</td>
           <td>{{ teamMember.roleLabel }}</td>
           <td>{{ teamMember.phone }}</td>
           <td>{{ teamMember.email }}</td>

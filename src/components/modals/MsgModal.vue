@@ -22,6 +22,7 @@
               v-if="msgModal.buttonLabel2"
               @click="msgModal.onclick2()"
               class="btn btn-secondary"
+              :style="bkColor"
           >
             {{ msgModal.buttonLabel2 }}
           </button>
@@ -38,6 +39,7 @@ import { msgModal } from '@/utils/modals/msg-modal.js';
 import {computed} from "vue";
 
 const btnDanger = computed(() => msgModal.danger?'btn-danger':'btn-primary')
+const bkColor = computed(() => msgModal.button2Color?'background-color:'+msgModal.button2Color:'')
 
 </script>
 
