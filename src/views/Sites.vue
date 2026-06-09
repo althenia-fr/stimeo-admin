@@ -60,7 +60,7 @@
 
 <script setup>
 import {onMounted, ref} from 'vue';
-import SiteModal from "@/components/SiteModal.vue";
+import SiteModal from "@/components/modals/SiteModal.vue";
 import {siteModal} from "@/utils/modals/site-modal.js";
 import {storageService} from "@/utils/storage.js";
 import axios from "axios";

@@ -77,7 +77,7 @@ import {API_BASE_URL} from "@/utils/http.js";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {msgModal} from "@/utils/modals/msg-modal.js";
 import {prettyPrintErrorMsg} from "@/utils/error.js";
-import PatientModal from "@/components/PatientModal.vue";
+import PatientModal from "@/components/modals/PatientModal.vue";
 import {ref,computed, onMounted} from "vue";
 import router from "@/router/router.js";
 

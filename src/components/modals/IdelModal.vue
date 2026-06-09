@@ -84,6 +84,8 @@
           </div>
 
         </form>
+
+
       </div>
     </div>
   </Transition>
@@ -97,35 +99,14 @@ import {msgModal} from "@/utils/modals/msg-modal.js";
 import axios from "axios";
 import {API_BASE_URL} from "@/utils/http.js";
 import {prettyPrintErrorMsg} from "@/utils/error.js";
-import {isValidEmail, validatePhoneNumber} from "@/utils/format.js";
+import {checkValidIdelForm} from "@/utils/idel.js";
 
 const emit = defineEmits(['idel-updated']);
-
-function checkValidData()
-{
-  let msg;
-
-  if(!idelModal.form.rpps) return "N° RPPS manquant"
-  else if((''+idelModal.form.rpps).trim().length!==11) return "Le N° RPPS doit contenir 11 chiffres"
-  else if(!idelModal.form.firstname) return "Prénom manquant"
-  else if(!idelModal.form.lastname) return "Nom manquant"
-
-  else if(!idelModal.form.email) return "Email manquant"
-  else if(!isValidEmail(idelModal.form.email)) return "L'email a un mauvais format"
-  else if(!idelModal.form.mobile) return "N° mobile manquant"
-  else if(msg = validatePhoneNumber(idelModal.form.mobile)) return msg
-
-  else if(!idelModal.form.address.add1) return "Adresse manquante"
-  else if(!idelModal.form.address.zip) return "Code postal manquant"
-  else if(!idelModal.form.address.city) return "Ville manquante"
-
-  else return null;
-}
 
 
 const saveIdel = async () => {
 
-  let msg = checkValidData();
+  let msg = checkValidIdelForm(idelModal.form);
   if(msg)
   {
     msgModal.show('Erreur',msg, 'OK', msgModal.defaultClose);
@@ -173,10 +154,10 @@ const saveIdel = async () => {
 
 
 <style scoped>
-@import '../assets/modal.css';
-@import '../assets/views.css';
-@import '../assets/forms.css';
-@import '../assets/tabnav.css';
+@import '../../assets/modal.css';
+@import '../../assets/views.css';
+@import '../../assets/forms.css';
+@import '../../assets/tabnav.css';
 
 .form-group {
   margin-bottom: 15px;

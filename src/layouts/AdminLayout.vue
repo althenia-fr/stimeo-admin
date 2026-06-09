@@ -77,12 +77,11 @@
 <script setup>
 
 import {goTo} from "@/router/router.js";
-import MsgModal from "@/components/MsgModal.vue";
+import MsgModal from "@/components/modals/MsgModal.vue";
 import {storageService} from "@/utils/storage.js";
 import {ref} from "vue";
 
 const isOrganisationOpen = ref(false);
-
 const toggleOrganisation = () => {
   isOrganisationOpen.value = !isOrganisationOpen.value;
 };

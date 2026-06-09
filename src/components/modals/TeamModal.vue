@@ -127,9 +127,9 @@ onMounted(() => {
 
 
 <style scoped>
-@import '../assets/modal.css';
-@import '../assets/views.css';
-@import '../assets/forms.css';
+@import '../../assets/modal.css';
+@import '../../assets/views.css';
+@import '../../assets/forms.css';
 
 .form-group {
   margin-bottom: 15px;

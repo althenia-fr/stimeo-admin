@@ -60,7 +60,7 @@
 
 <script setup>
 import {onMounted, ref} from 'vue';
-import DelegateModal from "@/components/DelegateModal.vue";
+import DelegateModal from "@/components/modals/DelegateModal.vue";
 import {delegateModal} from "@/utils/modals/delegate-modal.js";
 import {storageService} from "@/utils/storage.js";
 import axios from "axios";

@@ -52,16 +52,18 @@
           <td>{{ new Intl.DateTimeFormat('fr-FR').format(new Date(pec.createdOn)) }}</td>
           <td class="font-semibold">{{ pec.patientName }}</td>
           <td>{{ pec.doctorName }}</td>
-          <td>{{ pec.protocol }} </td>
+          <td>{{ !pec.protocol?'sans':pec.protocol }} </td>
           <td>{{ pec.installLabel }}</td>
-          <td @click="idelAptModal.openModal(pec)" :class="canOpenIdelAptModal(pec)?'clickable':''">{{ pec.idelStatus }}</td>
+          <td @click="openModal(pec)" :class="pec.protocol?'clickable':''">{{ pec.idelStatus }}</td>
           <td>{{ pec.depositLabel }}</td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <IdelAptModal @pec-updated="fetchPecs"/>
+  <IdelMgtAptModal @pec-updated="fetchPecs"/>
+  <IdelMgtReviewModal @pec-updated="fetchPecs"/>
+
 </template>
 
 <script setup>
@@ -70,11 +72,12 @@ import {storageService} from "@/utils/storage.js";
 import axios from "axios";
 import {API_BASE_URL} from "@/utils/http.js";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import IdelAptModal from "@/components/IdelAptModal.vue";
-import {canOpenIdelAptModal, idelAptModal} from "@/utils/modals/idel-apt-modal.js";
 import router from "@/router/router.js";
 import {msgModal} from "@/utils/modals/msg-modal.js";
-import {delegateModal} from "@/utils/modals/delegate-modal.js";
+import {openModal} from "@/utils/idel.js";
+
+import IdelMgtAptModal from "@/components/modals/IdelMgtAptModal.vue";
+import IdelMgtReviewModal from "@/components/modals/IdelMgtReviewModal.vue";
 
 const goBack = () => {
   router.back()
@@ -91,6 +94,8 @@ const filteredPecs = computed(() => {
         item.patientName?.toLowerCase().includes(query) ||
         item.doctorName?.toLowerCase().includes(query) ||
         item.protocol?.toLowerCase().includes(query) ||
+        item.idelStatus?.toLowerCase().includes(query) ||
+        item.status?.toLowerCase().includes(query) ||
         item.delegateName?.toLowerCase().includes(query)
     );
   });

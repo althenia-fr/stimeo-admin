@@ -69,7 +69,7 @@
 
 <script setup>
 import {computed, onMounted, ref} from 'vue';
-import TeamModal from "@/components/TeamModal.vue";
+import TeamModal from "@/components/modals/TeamModal.vue";
 import {teamModal} from "@/utils/modals/team-modal.js";
 import {storageService} from "@/utils/storage.js";
 import axios from "axios";

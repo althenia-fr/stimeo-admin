@@ -43,7 +43,7 @@ const btnDanger = computed(() => msgModal.danger?'btn-danger':'btn-primary')
 
 
 <style scoped>
-@import '../assets/modal.css';
-@import '../assets/views.css';
+@import '../../assets/modal.css';
+@import '../../assets/views.css';
 
 </style>
