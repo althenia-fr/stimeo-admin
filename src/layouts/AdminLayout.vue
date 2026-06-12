@@ -12,6 +12,7 @@
         </router-link>
 
         <div>
+
           <div
               class="menu-item group-title"
               @click="toggleOrganisation"
@@ -39,6 +40,7 @@
             </router-link>
 
           </div>
+
         </div>
 
         <router-link to="/auth/pecs" class="menu-item" active-class="active">
@@ -51,10 +53,35 @@
           <span class="label">Patients</span>
         </router-link>
 
-        <router-link to="/auth/idels" class="menu-item" active-class="active">
-          <font-awesome-icon icon="fa-solid fa-user-nurse"/>
-          <span class="label">Idels</span>
-        </router-link>
+        <div>
+
+          <div
+              class="menu-item group-title"
+              @click="toggleIdels"
+              :class="{ 'open': isIdelOpen }"
+          >
+            <font-awesome-icon :icon="isIdelOpen ? 'fa-regular fa-square-minus' : 'fa-solid fa-user-nurse'"/>
+            <span class="label">Idels</span>
+          </div>
+
+          <div class="sub-menu" v-show="isIdelOpen">
+
+            <router-link to="/auth/idels/list" class="menu-item" active-class="active">
+              <font-awesome-icon icon="fa-solid fa-user-nurse"/>
+              <span class="label">Idels</span>
+            </router-link>
+
+            <router-link to="/auth/idels/visits" class="menu-item" active-class="active">
+              <font-awesome-icon icon="fa-solid fa-money-bill-1"/>
+              <span class="label">Interventions</span>
+            </router-link>
+
+
+          </div>
+
+        </div>
+
+
 
       </nav>
 
@@ -84,6 +111,11 @@ import {ref} from "vue";
 const isOrganisationOpen = ref(false);
 const toggleOrganisation = () => {
   isOrganisationOpen.value = !isOrganisationOpen.value;
+};
+
+const isIdelOpen = ref(false);
+const toggleIdels = () => {
+  isIdelOpen.value = !isIdelOpen.value;
 };
 
 const logout = () => {

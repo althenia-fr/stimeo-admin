@@ -6,7 +6,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { faUser, faCartPlus, faSignOut, faMagnifyingGlass, faSpinner, faUsers, faPen, faHouseMedical, faUserNurse,
-    faTrashCan, faHandHoldingMedical, faBed, faPlus, faArrowLeftLong, faPeopleGroup, faUserCheck,faUserGroup,
+    faTrashCan, faHandHoldingMedical, faBed, faPlus, faArrowLeftLong, faPeopleGroup, faUserCheck,faUserGroup,faMoneyBill1,
+    faChevronDown, faChevronRight,
 } from '@fortawesome/free-solid-svg-icons'
 
 import {faFolderOpen, faSquarePlus,faSquareMinus,
@@ -14,7 +15,8 @@ import {faFolderOpen, faSquarePlus,faSquareMinus,
 
 library.add(
     faUser,faCartPlus, faSignOut,faMagnifyingGlass,faSpinner,faUsers, faPen, faHouseMedical, faUserNurse,
-    faTrashCan,faHandHoldingMedical,faBed,faPlus,faArrowLeftLong,faPeopleGroup,faUserCheck,faUserGroup,
+    faTrashCan,faHandHoldingMedical,faBed,faPlus,faArrowLeftLong,faPeopleGroup,faUserCheck,faUserGroup,faMoneyBill1,
+    faChevronDown, faChevronRight,
     faFolderOpen, faSquarePlus, faSquareMinus
 )
 

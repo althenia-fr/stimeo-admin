@@ -29,6 +29,7 @@
           <th>Email</th>
           <th style="width: 15%">Mobile</th>
           <th>Geoloc</th>
+          <th style="width: 10%">login</th>
           <th class="text-center">Actions</th>
         </tr>
         </thead>
@@ -51,6 +52,7 @@
           <td>{{ idel.email }}</td>
           <td class="font-mono">{{ idel.mobile }}</td>
           <td>{{ idel.address.longitude}} {{ idel.address.latitude}}</td>
+          <td>{{ idel.login}}</td>
           <td class="text-center">
             <button class="action-btn edit-btn" @click="idelModal.openEditModal(idel)" title="Modifier">
               <font-awesome-icon icon="fa-solid fa-pen"/>

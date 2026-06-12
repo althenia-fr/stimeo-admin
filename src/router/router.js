@@ -11,6 +11,7 @@ import Pecs from "@/views/Pecs.vue";
 import TeamMembers from "@/views/TeamMembers.vue";
 import Patients from "@/views/Patients.vue";
 import Idels from "@/views/Idels.vue";
+import IdelVisits from "@/views/IdelVisits.vue";
 
 const routes = [
     {
@@ -40,7 +41,8 @@ const routes = [
             { path: 'pecs', component: Pecs },
             { path: 'teams/:tid', name:'members', component: TeamMembers, props: true },
             { path: 'patients', component: Patients },
-            { path: 'idels', component: Idels },
+            { path: 'idels/list', component: Idels },
+            { path: 'idels/visits', component: IdelVisits },
 
         ]
     },
