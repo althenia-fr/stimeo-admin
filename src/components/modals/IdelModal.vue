@@ -12,7 +12,9 @@
           <div class="tabs-nav">
             <button type="button" :class="{ active: idelModal.activeTab === 'identity' }" @click="idelModal.activeTab = 'identity'">Identité</button>
             <button type="button" :class="{ active: idelModal.activeTab === 'contact' }" @click="idelModal.activeTab = 'contact'">Contact</button>
-            <button type="button" :class="{ active: idelModal.activeTab === 'address' }" @click="idelModal.activeTab = 'address'">Adresse</button>
+            <button type="button" :class="{ active: idelModal.activeTab === 'address' }" @click="idelModal.activeTab = 'address'">Zone</button>
+            <button type="button" :class="{ active: idelModal.activeTab === 'bank' }" @click="idelModal.activeTab = 'bank'">Paiement</button>
+            <button type="button" :class="{ active: idelModal.activeTab === 'skills' }" @click="idelModal.activeTab = 'skills'">Soins</button>
           </div>
 
           <div class="tabs-content">
@@ -53,16 +55,12 @@
 
             </div>
 
-            <!-- Tab 3 Address -->
+            <!-- Tab Address -->
             <div v-show="idelModal.activeTab === 'address'">
 
               <div class="form-group">
                 <label>N° + Voie</label>
                 <input type="text" v-model="idelModal.form.address.add1" class="form-control" />
-              </div>
-              <div class="form-group">
-                <label>Complément d'Adresse</label>
-                <input type="text" v-model="idelModal.form.address.add2" class="form-control" />
               </div>
               <div class="form-row">
                 <div class="form-group">
@@ -74,8 +72,50 @@
                   <input type="text" v-model="idelModal.form.address.city" class="form-control" />
                 </div>
               </div>
+              <div class="form-group">
+                <label>Rayon d'intervention (km)</label>
+                <input type="text" v-model="idelModal.form.radiusKm" class="form-control" />
+              </div>
 
             </div>
+
+            <!-- Tab Bank -->
+            <div v-show="idelModal.activeTab === 'bank'">
+
+
+              <div class="form-group">
+                <label>IBAN</label>
+                <input type="text" v-model="idelModal.form.iban" placeholder="FR..." class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label>BIC</label>
+                <input type="text" v-model="idelModal.form.bic" class="form-control" />
+              </div>
+
+            </div>
+
+
+            <!-- Tab Qualifications -->
+            <div v-show="idelModal.activeTab === 'skills'">
+
+              <div class="form-group">
+                <label>Soins acceptés</label>
+                <textarea type="text" v-model="idelModal.form.acceptedCare" disabled class="form-control"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Diplôme</label>
+                <input type="text" v-model="idelModal.form.diploma" disabled class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label>Certification</label>
+                <input type="text" v-model="idelModal.form.certif" disabled class="form-control" />
+              </div>
+
+            </div>
+
           </div>
 
           <div class="modal-footer">
@@ -161,6 +201,10 @@ const saveIdel = async () => {
 
 .form-group {
   margin-bottom: 15px;
+}
+
+.modal-content {
+  max-width: 500px;
 }
 
 </style>

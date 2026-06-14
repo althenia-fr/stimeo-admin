@@ -72,8 +72,8 @@
             </router-link>
 
             <router-link to="/auth/idels/visits" class="menu-item" active-class="active">
-              <font-awesome-icon icon="fa-solid fa-money-bill-1"/>
-              <span class="label">Interventions</span>
+              <font-awesome-icon icon="fa-solid fa-house-medical-circle-check"/>
+              <span class="label">Visites</span>
             </router-link>
 
 

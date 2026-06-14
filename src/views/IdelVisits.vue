@@ -25,7 +25,7 @@
       <table v-else v-for="(period, periodIndex) in groupedIdelComs" :key="periodIndex" class="data-table">
         <thead>
         <tr>
-          <th colspan="4">{{ period.label }}</th>
+          <th colspan="5">{{ period.label }}</th>
         </tr>
         </thead>
         <tbody>
@@ -39,7 +39,7 @@
               />
               <strong>{{ idel.name }}</strong>
             </td>
-            <td>{{ idel.patients }}</td>
+            <td colspan="2">{{ idel.patients }}</td>
             <td colspan="2">{{ idel.total }} visite{{ idel.total > 1 ? 's' : '' }}</td>
           </tr>
 
@@ -53,6 +53,7 @@
               {{ formatDate(visit.visitTsSec) || 'Date non spécifiée' }}
             </td>
             <td> <span class="patient-name">{{ visit.patientName }}</span></td>
+            <td>{{visit.sourceIdel}}</td>
             <td>{{visit.visitStatus}}</td>
             <td class="action-cell">
               <button @click.stop="triggerCommission(idel, visit)" class="btn-commission">
@@ -123,7 +124,7 @@ const fetchIdelCommissions = async () => {
         'Authorization': 'Basic ' + admin.secret,
       }
     }
-    const response = await axios.get(API_BASE_URL+'/admin/idel/com/get', axiosRequestConfig);
+    const response = await axios.get(API_BASE_URL+'/admin/idel/visit/get', axiosRequestConfig);
     groupedIdelComs.value = groupIdelComs(response.data);
   } catch (error) {
     console.log("error whilst fetching idels", error);

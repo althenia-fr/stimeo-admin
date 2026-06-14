@@ -4,7 +4,7 @@ export const idelModal = reactive({
     isOpen: false,
     isEditing : false,
     activeTab : 'identity',
-    form: { uid: null,  lastname: '',  firstname: '', email: '', mobile: '' , rpps:'', address:{}},
+    form: { uid: null,  lastname: '',  firstname: '', email: '', mobile: '' , rpps:'', address:{}, iban:'', bic:'', acceptedCare:'', diploma:'', certif:'', radiusKm:50},
 
     // Actions pour modifier l'état
     show() {

@@ -1,11 +1,11 @@
 <template>
   <div class="page-container">
+
     <div class="page-header">
       <div class="header-titles">
         <h2 class="title"><font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/> Catalogue</h2>
         <p class="subtitle">Gestion des références fournisseurs</p>
       </div>
-
       <div class="search-wrapper">
         <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="search-icon"/>
         <input
@@ -15,33 +15,21 @@
             class="search-input"
         />
       </div>
+      <button class="btn btn-primary" @click="updateCatalog">
+        <font-awesome-icon icon="fa-solid fa-plus"/> Mettre à jour
+      </button>
     </div>
 
     <div class="action-card">
-      <form @submit.prevent="handleImport" class="import-form">
-        <div class="action-bar-group manufacturer-group">
-          <select id="manufacturer" v-model="selectedManufacturer" required class="form-control">
-            <option value="" disabled selected>Indiquer le fournisseur</option>
-            <option value="Manfred Sauer">Manfred Sauer</option>
-            <option value="Schwa Medico">Schwa Medico</option>
-            <option value="Tensi+">Tensi+</option>
-            <option value="Flowtens">Flowtens</option>
-            <option value="Hollister">Hollister</option>
-            <option value="Teleflex">Teleflex</option>
-            <option value="Autre">Autre</option>
-          </select>
-        </div>
-
-        <div class="action-bar-group" style="flex: 1;">
-          <input type="file" id="file" class="form-control" accept=".csv, .json, .pdf, .xls, .xslx" @change="handleFileChange" required />
-        </div>
+      <div class="import-form">
 
         <button type="submit" class="btn btn-primary" :disabled="isUploading">
           <font-awesome-icon v-if="isUploading" icon="fa-solid fa-spinner" class="fa-spin"></font-awesome-icon>
           <i v-else class="fa-solid fa-cloud-arrow-up"></i>
           <span>Importer</span>
         </button>
-      </form>
+      </div>
+
     </div>
 
     <div class="table-scroll-container">
@@ -97,6 +85,7 @@ import {API_BASE_URL} from "@/utils/http.js";
 import {storageService} from "@/utils/storage.js";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import router from "@/router/router.js";
+import {idelModal} from "@/utils/modals/idel-modal.js";
 
 const goBack = () => {
   router.back()
@@ -180,6 +169,30 @@ const filteredCatalog = computed(() => {
     );
   });
 });
+
+const updateCatalog = async () => {
+
+  isLoadingTable.value = true;
+  try {
+    let admin = storageService.getItem('admin');
+    let axiosRequestConfig = {
+      headers: {
+        'Content-Type':'application/json; charset=utf-8',
+        'Authorization': 'Basic ' + admin.secret,
+      }
+    }
+
+    const response = await axios.get(API_BASE_URL+'/admin/catalog/update',axiosRequestConfig);
+    catalogItems.value = response.data;
+
+  } catch (error) {
+    console.log("error whilst fetching the catalog", error);
+  } finally {
+    isLoadingTable.value = false;
+  }
+
+}
+
 
 const isLoadingTable = ref(false);
 const fetchCatalog = async () => {
