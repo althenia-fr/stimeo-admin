@@ -101,7 +101,7 @@
 
               <div class="form-group">
                 <label>Soins acceptés</label>
-                <textarea type="text" v-model="idelModal.form.acceptedCare" disabled class="form-control"></textarea>
+                <textarea rows="5" type="text" v-model="idelModal.form.acceptedCare" disabled class="form-control"></textarea>
               </div>
 
               <div class="form-group">

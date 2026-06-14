@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group">
                   <label>Date Naissance</label>
-                  <input type="text" v-model="patientModal.form.localeBirthdate" placeholder="JJ/MM/AAAA" class="form-control" />
+                  <input type="text" @keyup="formatDate" v-model="patientModal.form.localBirthdate" placeholder="JJ/MM/AAAA" class="form-control" />
                 </div>
               </div>
 
@@ -138,6 +138,33 @@ import {API_BASE_URL} from "@/utils/http.js";
 import {prettyPrintErrorMsg} from "@/utils/error.js";
 
 const emit = defineEmits(['patient-updated']);
+
+const formatDate = (event) => {
+  // 1. Si l'utilisateur appuie sur Retour arrière (Backspace), on ne fait rien
+  // pour lui permettre d'effacer le slash normalement.
+  if (event.key === 'Backspace') {
+    return;
+  }
+
+  // 2. On récupère la valeur actuelle et on enlève tout ce qui n'est pas un chiffre
+  let value = patientModal.form.localBirthdate.replace(/\D/g, '');
+  let formattedValue = '';
+
+  // 3. On reconstruit la chaîne avec les slashs aux bons endroits
+  if (value.length > 0) {
+    formattedValue += value.substring(0, 2);
+  }
+  if (value.length >= 2) {
+    formattedValue += '/' + value.substring(2, 4);
+  }
+  if (value.length >= 4) {
+    formattedValue += '/' + value.substring(4, 8);
+  }
+
+  // 4. On met à jour la variable réactive
+  patientModal.form.localBirthdate = formattedValue;
+};
+
 
 const savePatient = async () => {
 

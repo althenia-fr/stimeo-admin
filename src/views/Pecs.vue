@@ -27,13 +27,13 @@
         <thead>
         <tr>
           <th>Création</th>
+          <th>Délégué</th>
           <th>Patient</th>
           <th>Prescripteur</th>
           <th>Protocole</th>
           <th>Statut</th>
           <th>Idel</th>
           <th>Caution</th>
-          <th class="text-center">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -51,17 +51,13 @@
         </tr>
         <tr v-else v-for="(pec, index) in filteredPecs" :key="index">
           <td>{{ new Intl.DateTimeFormat('fr-FR').format(new Date(pec.createdOn)) }}</td>
+          <td>{{ pec.delegateName }}</td>
           <td class="font-semibold">{{ pec.patientName }}</td>
           <td>{{ pec.doctorName }}</td>
           <td>{{ !pec.protocol?'sans':pec.protocol }} </td>
           <td>{{ pec.installLabel }}</td>
           <td @click="openModal(pec)" :class="pec.protocol?'clickable':''">{{ pec.idelStatus }}</td>
           <td>{{ pec.depositLabel }}</td>
-          <td class="text-center">
-            <button class="action-btn edit-btn" @click="confirmDeleteModal(pec)" title="Effacer">
-              <font-awesome-icon icon="fa-solid fa-trash-can"/>
-            </button>
-          </td>
         </tr>
         </tbody>
       </table>
