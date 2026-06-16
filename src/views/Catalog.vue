@@ -20,18 +20,6 @@
       </button>
     </div>
 
-    <div class="action-card">
-      <div class="import-form">
-
-        <button type="submit" class="btn btn-primary" :disabled="isUploading">
-          <font-awesome-icon v-if="isUploading" icon="fa-solid fa-spinner" class="fa-spin"></font-awesome-icon>
-          <i v-else class="fa-solid fa-cloud-arrow-up"></i>
-          <span>Importer</span>
-        </button>
-      </div>
-
-    </div>
-
     <div class="table-scroll-container">
       <table class="stimeo-table">
         <thead>
