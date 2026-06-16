@@ -32,7 +32,7 @@
           <th>Prescripteur</th>
           <th>Protocole</th>
           <th>Statut</th>
-          <th>Idel</th>
+          <th>A signer</th>
           <th>Caution</th>
         </tr>
         </thead>
@@ -55,8 +55,8 @@
           <td class="font-semibold">{{ pec.patientName }}</td>
           <td>{{ pec.doctorName }}</td>
           <td>{{ !pec.protocol?'sans':pec.protocol }} </td>
-          <td>{{ pec.installLabel }}</td>
-          <td @click="openModal(pec)" :class="pec.protocol?'clickable':''">{{ pec.idelStatus }}</td>
+          <td @click="openModal(pec,onPecUpdateCallback)" :class="pec.protocol?'clickable':''">{{ pec.overallStatus }}</td>
+          <td>{{ pec.signatureStatus }}</td>
           <td>{{ pec.depositLabel }}</td>
         </tr>
         </tbody>
@@ -133,6 +133,11 @@ function ctaStimeoConnect()
       "Eventuellement, créez-le profil IDEL ici dans l'Admin. Une invitation SMS sera envoyée à l'IDEL pour installer l'App Thérésa. " +
       "Quand vous remplirez la PEC dans Stimeo Connect, veillez bien à mettre le numéro mobile de l'IDEL pour faire le lien avec son profil."
   msgModal.show('Utilisez Stimeo Connect', msg, 'OK',msgModal.defaultClose);
+}
+
+function onPecUpdateCallback(newPecs)
+{
+  pecs.value = newPecs;
 }
 
 

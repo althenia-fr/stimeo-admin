@@ -7,7 +7,7 @@
   --stimeo-text: #1E293B;         /* Texte principal */
   --stimeo-text-light: #64748B;   /* Texte secondaire */
   --stimeo-border: #E2E8F0;       /* Lignes de séparation */
-  --stimeo-danger: #ff4949;
+  --stimeo-danger: #e12d2d;
 }
 
 * {
