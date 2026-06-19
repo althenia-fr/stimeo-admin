@@ -10,12 +10,12 @@
         <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="search-icon"/>
         <input
             type="text"
-            v-model="searchQuery"
+            v-model="search"
             placeholder="Rechercher partout..."
             class="search-input"
         />
       </div>
-      <button class="btn btn-primary" @click="patientModal.openAddModal">
+      <button class="btn btn-primary" @click="function(){goToPatient(null)}">
         <font-awesome-icon icon="fa-solid fa-plus"/> Ajouter un Patient
       </button>
     </div>
@@ -26,58 +26,44 @@
         <tr>
           <th>NIR</th>
           <th>Nom</th>
-          <th>Date Naissance</th>
+          <th>Né(e) le</th>
           <th style="width: 15%">Mobile</th>
-          <th>Geoloc</th>
-          <th class="text-center">Actions</th>
+          <th >Email</th>
         </tr>
         </thead>
         <tbody>
         <tr v-if="isLoadingTable">
-          <td colspan="6" class="empty-state">
+          <td colspan="5" class="empty-state">
             <font-awesome-icon icon="fa-solid fa-spinner" class="fa-spin" style="font-size: 1.5rem; margin-bottom: 10px;" />
             <p>Chargement des données...</p>
           </td>
         </tr>
         <tr v-if="!isLoadingTable && filteredPatients.length === 0">
-          <td colspan="6" class="empty-state">
+          <td colspan="5" class="empty-state">
             <i class="fa-solid fa-users-slash"></i>
             <p>Pas de données</p>
           </td>
         </tr>
-        <tr v-else v-for="(patient, index) in filteredPatients" :key="index">
+        <tr v-else v-for="(patient, index) in filteredPatients" :key="index" @click="goToPatient(patient)">
           <td>{{ patient.nir }}</td>
           <td class="font-semibold">{{ patient.lastname }} {{ patient.firstname }}</td>
           <td>{{ patient.localeBirthdate }}</td>
-          <td class="font-mono">{{ patient.phone }}</td>
-          <td>{{ patient.address?.longitude}} {{ patient.address?.latitude}}</td>
-          <td class="text-center">
-            <button class="action-btn edit-btn" @click="patientModal.openEditModal(patient)" title="Modifier">
-              <font-awesome-icon icon="fa-solid fa-pen"/>
-            </button>
-            &nbsp;
-            <button class="action-btn edit-btn" @click="confirmDeleteModal(patient)" title="Effacer">
-              <font-awesome-icon icon="fa-solid fa-trash-can"/>
-            </button>
-          </td>
+          <td>{{ patient.phone }}</td>
+          <td>{{ patient.email }}</td>
         </tr>
         </tbody>
       </table>
     </div>
 
-    <PatientModal @patient-updated="fetchPatients"/>
+    <!--PatientModal @patient-updated="fetchPatients"/-->
   </div>
 </template>
 
 <script setup>
-import {patientModal} from "@/utils/modals/patient-modal.js";
 import {storageService} from "@/utils/storage.js";
 import axios from "axios";
 import {API_BASE_URL} from "@/utils/http.js";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import {msgModal} from "@/utils/modals/msg-modal.js";
-import {prettyPrintErrorMsg} from "@/utils/error.js";
-import PatientModal from "@/components/modals/PatientModal.vue";
 import {ref,computed, onMounted} from "vue";
 import router from "@/router/router.js";
 
@@ -86,11 +72,11 @@ const goBack = () => {
 }
 
 
-const searchQuery = ref('');
+const search = ref('');
 const patients = ref([]);
 
 const filteredPatients = computed(() => {
-  const query = searchQuery.value.trim().toLowerCase();
+  const query = search.value.trim().toLowerCase();
   if (!query) return patients.value;
   return patients.value.filter(item => {
     return (
@@ -115,7 +101,7 @@ const fetchPatients = async () => {
         'Authorization': 'Basic ' + admin.secret,
       }
     }
-    const response = await axios.get(API_BASE_URL+'/admin/patient/get',axiosRequestConfig);
+    const response = await axios.get(API_BASE_URL+'/admin/patient/list',axiosRequestConfig);
 
     patients.value = response.data;
   } catch (error) {
@@ -126,49 +112,13 @@ const fetchPatients = async () => {
 };
 
 
-const doDeletePatient = async (patient) => {
-
-  try {
-    const payload = {
-      uid: patient.uid,
-    };
-
-    let admin = storageService.getItem('admin');
-    let axiosRequestConfig = {
-      headers: {
-        'Content-Type':'application/json; charset=utf-8',
-        'Authorization': 'Basic ' + admin.secret,
-      }
-    }
-
-    // 3. Appel POST Axios standard
-    msgModal.show('Opération en cours', "Veuillez patienter...");
-    const response = await axios.post(API_BASE_URL+'/admin/patient/delete', payload,axiosRequestConfig);
-    msgModal.defaultClose();
-
-    if(response.status===200)
-    {
-      if (response.data) patients.value = response.data;
-    }
-    else
-    {
-      msgModal.show('Erreur', "code "+response.status, 'OK',function(){msgModal.defaultClose();patientModal.isOpen = true;});
-    }
-
-  } catch (error) {
-    let err = prettyPrintErrorMsg(error.response)
-    console.error("Erreur:",err );
-    if(err==='DATA_EXISTS') err = "On ne peut pas effacer le Patient car il est relié à des Prises en Charges";
-
-    msgModal.show('Erreur', err, 'OK',function(){msgModal.defaultClose();});
-  }
-};
-
-function confirmDeleteModal(patient)
+function goToPatient(patient)
 {
-  msgModal.show('Effacer', "Voulez-vous vraiment effacer le Patient "+patient.firstname+" "+patient.lastname+"?", 'Effacer',function(){msgModal.defaultClose();doDeletePatient(patient)}, "Annuler", msgModal.defaultClose, true);
+  router.push({
+    name: 'patient',
+    params: { uid: patient?patient.uid:0 }
+  });
 }
-
 
 onMounted(() => {
   fetchPatients();
@@ -178,4 +128,7 @@ onMounted(() => {
 
 <style scoped>
 @import '../assets/views.css';
+
+.danger { color:var(--stimeo-danger) }
+
 </style>

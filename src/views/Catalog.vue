@@ -10,7 +10,7 @@
         <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="search-icon"/>
         <input
             type="text"
-            v-model="searchQuery"
+            v-model="search"
             placeholder="Rechercher partout..."
             class="search-input"
         />
@@ -35,7 +35,7 @@
         </thead>
         <tbody>
         <tr v-if="isLoadingTable">
-          <td colspan="8" class="empty-state">
+          <td colspan="7" class="empty-state">
             <font-awesome-icon icon="fa-solid fa-spinner" class="fa-spin" style="font-size: 1.5rem; margin-bottom: 10px;" />
             <p>Chargement des références...</p>
           </td>
@@ -52,7 +52,7 @@
           </tr>
         </template>
         <tr v-else>
-          <td colspan="8" class="empty-state">
+          <td colspan="7" class="empty-state">
             <font-awesome-icon icon="fa-regular fa-folder-open" style="font-size: 1.5rem; margin-bottom: 10px;" />
             <p>Aucune référence enregistrée</p>
           </td>
@@ -82,7 +82,7 @@ const goBack = () => {
 const selectedManufacturer = ref('');
 const selectedFile = ref(null);
 const isUploading = ref(false);
-const searchQuery = ref('');
+const search = ref('');
 
 // Données d'exemple
 const catalogItems = ref([]);
@@ -144,7 +144,7 @@ const handleImport = async () => {
 };
 
 const filteredCatalog = computed(() => {
-  const query = searchQuery.value.trim().toLowerCase();
+  const query = search.value.trim().toLowerCase();
   if (!query) return catalogItems.value;
   return catalogItems.value.filter(item => {
     return (

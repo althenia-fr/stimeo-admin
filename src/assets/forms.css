@@ -16,6 +16,28 @@
     margin-bottom: 1.25rem;
 }
 
+.form-group-inline {
+    display: grid;
+    /* On utilise minmax(0, 1fr) pour empêcher l'élément de déborder */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 0.6rem;
+}
+
+.form-group-inline label {
+    text-align: right;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--stimeo-text-light);
+    /* Forcer le saut de ligne si le label est trop long */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    /* Empêcher le label de forcer l'agrandissement de sa colonne */
+    min-width: 0;
+}
+
 .form-row .form-group {
     flex-grow: 1;
 }

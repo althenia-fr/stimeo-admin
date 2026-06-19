@@ -9,7 +9,7 @@
         <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="search-icon"/>
         <input
             type="text"
-            v-model="searchQuery"
+            v-model="search"
             placeholder="Rechercher partout..."
             class="search-input"
         />
@@ -83,10 +83,10 @@ const goBack = () => {
   router.back()
 }
 
-const searchQuery = ref('');
+const search = ref('');
 
 const filteredTeams = computed(() => {
-  const query = searchQuery.value.trim().toLowerCase();
+  const query = search.value.trim().toLowerCase();
   if (!query) return teamModal.teams;
   return teamModal.teams.filter(item => {
     return (

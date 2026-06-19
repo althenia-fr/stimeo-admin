@@ -48,3 +48,41 @@ export function mobile2msisdn(mobile) {
     return +("33"+cleanedPhone.substring(1));
 
 }
+
+export function isoToLocalDate(iso){
+    return iso.substring(8, 10)+'/'+iso.substring(5, 7)+'/'+iso.substring(0, 4)
+}
+
+
+export function localeToIsoDate(locale){
+    return locale.substring(6, 10)+'-'+locale.substring(3, 5)+'-'+locale.substring(0,2)
+}
+
+
+export function formatDate(event,targetObj,key){
+    // 1. Si l'utilisateur appuie sur Retour arrière (Backspace), on ne fait rien
+    // pour lui permettre d'effacer le slash normalement.
+    if (event.key === 'Backspace') {
+        return;
+    }
+
+    // On récupère la valeur actuelle
+    const input = event.target.value
+    // et on enlève tout ce qui n'est pas un chiffre
+    let value = input.replace(/\D/g, '');
+    let formattedInput = '';
+
+    // On reconstruit la chaîne avec les slashs aux bons endroits
+    if (value.length > 0) {
+        formattedInput += value.substring(0, 2);
+    }
+    if (value.length >= 2) {
+        formattedInput += '/' + value.substring(2, 4);
+    }
+    if (value.length >= 4) {
+        formattedInput += '/' + value.substring(4, 8);
+    }
+
+    // 4. On met à jour la variable réactive
+    targetObj[key] = formattedInput;
+};

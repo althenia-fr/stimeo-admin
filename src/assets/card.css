@@ -1,0 +1,24 @@
+/* Card Styling */
+
+.card-grid-2x {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.info-card {
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid var(--stimeo-border);
+    height: 100%;
+    padding: 1.1rem;
+}
+
+.card-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.85rem;
+    color: var(--stimeo-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}

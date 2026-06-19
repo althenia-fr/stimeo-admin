@@ -10,7 +10,7 @@
         <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="search-icon"/>
         <input
             type="text"
-            v-model="searchQuery"
+            v-model="search"
             placeholder="Rechercher partout..."
             class="search-input"
         />
@@ -88,11 +88,11 @@ const goBack = () => {
 }
 
 
-const searchQuery = ref('');
+const search = ref('');
 const idels = ref([]);
 
 const filteredIdels = computed(() => {
-  const query = searchQuery.value.trim().toLowerCase();
+  const query = search.value.trim().toLowerCase();
   if (!query) return idels.value;
   return idels.value.filter(item => {
     return (
