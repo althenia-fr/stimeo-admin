@@ -4,7 +4,7 @@
       <div class="header-titles">
         <h2 class="title">
           <font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/>
-          Pec {{pec.pecid}}
+          Prise en Charge {{pec.patientName}}
         </h2>
         <p class="subtitle">Détails de la Prise en Charge</p>
       </div>
@@ -14,7 +14,7 @@
     <div class="tabs-nav">
       <button>Devis / Bon / Facture</button>
       <button :class="{ active: currentTab === 'Locations' }" @click="currentTab = 'Locations'">Locations</button>
-      <button>Document</button>
+      <button :class="{ active: currentTab === 'Docs' }" @click="currentTab = 'Docs'">Document</button>
       <button>Notes</button>
       <button>Visites</button>
       <button :class="{ active: currentTab === 'Misc' }" @click="currentTab = 'Misc'">Divers</button>
@@ -37,6 +37,7 @@ import axios from "axios";
 import {storageService} from "@/utils/storage.js";
 import router from "@/router/router.js";
 import PecDetailsMisc from "@/components/PecDetailsTabs/PecDetailsMisc.vue";
+import PecDetailsDocs from "@/components/PecDetailsTabs/PecDetailsDocs.vue";
 
 const currentTab = ref('Locations');
 const goBack = () => router.back();
@@ -44,6 +45,7 @@ const goBack = () => router.back();
 const activeTabComponent = computed(() => {
   if (currentTab.value === 'Location') return PecDetailsLocation;
   if (currentTab.value === 'Misc') return PecDetailsMisc;
+  if (currentTab.value === 'Docs') return PecDetailsDocs;
 });
 
 const props = defineProps({
