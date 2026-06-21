@@ -1,14 +1,5 @@
 <template>
   <div class="page-container">
-    <div class="page-header">
-      <div class="header-titles">
-        <h2 class="title">
-          <font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/>
-          Patient {{patientData.user?.lastname}} {{patientData.user?.firstname}}
-        </h2>
-        <p class="subtitle">Fiche patient détaillée</p>
-      </div>
-    </div>
 
     <div style="border-bottom: 1px solid #ddd;margin-bottom: 20px;">
       <div style="float: right;">
@@ -19,17 +10,9 @@
         <button :class="{ active: currentTab === 'ID' }" @click="currentTab = 'ID'">Info. Personnelles</button>
         <button :class="{ active: currentTab === 'Payee' }" @click="currentTab = 'Payee'">Tiers-Payant</button>
         <button :class="{ active: currentTab === 'Entourage' }" @click="currentTab = 'Entourage'">Entourage</button>
-        <button v-if="uid>0" :class="{ active: currentTab === 'Pecs' }" @click="currentTab = 'Pecs'">Prise(s) en Charge</button>
-        <button v-if="uid>0" :class="{ active: currentTab === 'Misc' }" @click="currentTab = 'Misc'">Divers</button>
-        <!--button>Devis / Bon / Facture</button>
-        <button :class="{ active: currentTab === 'Locations' }" @click="currentTab = 'Locations'">Locations</button>
-        <button>Document</button>
-        <button>Notes</button>
-        <button>Visites</button-->
       </div>
 
     </div>
-
 
     <div class="tabs-content">
       <component :is="activeTabComponent"  />
@@ -39,15 +22,12 @@
 </template>
 
 <script setup>
-import {ref, computed, onMounted} from 'vue';
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import {ref, computed, watch} from 'vue';
 import router from "@/router/router.js";
 import PatientDetailsID from "@/components/PatientDetailsTabs/PatientDetailsID.vue";
 import PatientDetailsPayee from "@/components/PatientDetailsTabs/PatientDetailsPayee.vue";
-import PatientDetailsMisc from "@/components/PatientDetailsTabs/PatientDetailsMisc.vue";
 import PatientDetailsEntourage from "@/components/PatientDetailsTabs/PatientDetailsEntourage.vue";
-import PatientDetailsPecs from "@/components/PatientDetailsTabs/PatientDetailsPecs.vue";
-import {fetchPatientData, patientData, savePatient} from "@/utils/patient.js";
+import {fetchPatientData, savePatient} from "@/utils/patient.js";
 
 
 const currentTab = ref('ID');
@@ -56,17 +36,20 @@ const goBack = () => router.back();
 const activeTabComponent = computed(() => {
   if (currentTab.value === 'Payee') return PatientDetailsPayee;
   if (currentTab.value === 'Entourage') return PatientDetailsEntourage;
-  if (currentTab.value === 'Pecs') return PatientDetailsPecs;
-  if (currentTab.value === 'Misc') return PatientDetailsMisc;
   else return PatientDetailsID; //default
 
 });
 
 const props = defineProps({
-  uid: String,
+  pec: Object,
 });
 
-onMounted(function(){fetchPatientData(props.uid)});
+watch(() => props.pec, async (newPec) => {
+  fetchPatientData(newPec.patientUid)
+});
+
+
+//onMounted(function(){fetchPatientData(props.pec.patientUid)});
 
 </script>
 

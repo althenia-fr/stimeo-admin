@@ -66,8 +66,6 @@ const props = defineProps({
   search: String,
 });
 
-console.log('uid:'+props.uid+" search:"+props.search)
-
 const goBack = () => {
   router.back()
 }

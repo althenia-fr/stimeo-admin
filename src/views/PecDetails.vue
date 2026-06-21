@@ -8,21 +8,20 @@
         </h2>
         <p class="subtitle">Détails de la Prise en Charge</p>
       </div>
-      <button class="btn btn-primary">Enregistrer</button>
     </div>
 
     <div class="tabs-nav">
-      <button>Devis / Bon / Facture</button>
-      <button :class="{ active: currentTab === 'Locations' }" @click="currentTab = 'Locations'">Locations</button>
-      <button :class="{ active: currentTab === 'Docs' }" @click="currentTab = 'Docs'">Document</button>
-      <button>Notes</button>
-      <button>Visites</button>
+      <button :class="{ active: currentTab === 'Patient' }" @click="currentTab = 'Patient'">Patient</button>
+      <button>Suivi</button>
+      <button>Logisitique</button>
+      <button :class="{ active: currentTab === 'Docs' }" @click="currentTab = 'Docs'">Documents</button>
+      <button>A compléter</button>
       <button :class="{ active: currentTab === 'Misc' }" @click="currentTab = 'Misc'">Divers</button>
 
     </div>
 
     <div class="tabs-content">
-      <component :is="activeTabComponent" :pec="pec" />
+      <component v-if="pec" :is="activeTabComponent" :pec="pec"/>
     </div>
 
   </div>
@@ -38,12 +37,13 @@ import {storageService} from "@/utils/storage.js";
 import router from "@/router/router.js";
 import PecDetailsMisc from "@/components/PecDetailsTabs/PecDetailsMisc.vue";
 import PecDetailsDocs from "@/components/PecDetailsTabs/PecDetailsDocs.vue";
+import PatientDetailsWithinPec from "@/components/PecDetailsTabs/PecDetailsPatient.vue";
 
-const currentTab = ref('Locations');
+const currentTab = ref('Patient');
 const goBack = () => router.back();
 
 const activeTabComponent = computed(() => {
-  if (currentTab.value === 'Location') return PecDetailsLocation;
+  if (currentTab.value === 'Patient') return PatientDetailsWithinPec;
   if (currentTab.value === 'Misc') return PecDetailsMisc;
   if (currentTab.value === 'Docs') return PecDetailsDocs;
 });
