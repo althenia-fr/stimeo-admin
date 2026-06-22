@@ -10,7 +10,7 @@
         <th>Prescripteur</th>
         <th>Protocole</th>
         <th>Statut</th>
-        <th>A signer</th>
+        <th><label>A completer <span v-if="toCompleteCount>0" class="badge">{{toCompleteCount}}</span></label></th>
         <th>Caution</th>
       </tr>
       </thead>
@@ -34,7 +34,7 @@
         <td>{{ pec.doctorName }}</td>
         <td>{{ !pec.protocol?'sans':pec.protocol }} </td>
         <td @click="openModal(pec,onPecUpdateCallback)" :class="pec.protocol?'clickable':''">{{ pec.overallStatus }}</td>
-        <td>{{ pec.signatureStatus }}</td>
+        <td>{{ pec.billableDetails }}</td>
         <td>{{ pec.depositLabel }}</td>
       </tr>
       </tbody>
@@ -60,6 +60,15 @@ import {msgModal} from "@/utils/modals/msg-modal.js";
 import {prettyPrintErrorMsg} from "@/utils/error.js";
 
 
+const toCompleteCount = computed(()=>{
+  let count=0
+  for(let i=0;i<filteredPecs.value.length;i++)
+  {
+    let iter = filteredPecs.value[i]
+    if(!iter.billableStatus) count++
+  }
+  return count;
+})
 
 const props = defineProps({
   uid: Number,
@@ -113,6 +122,7 @@ const fetchPecs = async () => {
     const response = await axios.get(API_BASE_URL+url,axiosRequestConfig);
 
     pecs.value = response.data;
+
   } catch (error) {
     console.log("error whilst fetching teams", error);
   } finally {

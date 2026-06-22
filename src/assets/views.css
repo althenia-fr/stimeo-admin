@@ -217,6 +217,42 @@ td{
     text-decoration: underline;
 }
 
+label {
+    position: relative;
+    display: inline-flex;  /* Permet au badge de se caler juste après le texte et non au bout de la ligne */
+    align-items: center;
+}
+
+.badge {
+    position: absolute;
+    top: -6px;               /* Remonte la pastille légèrement au-dessus du texte */
+    right: -16px;            /* Décale la pastille juste après le mot */
+
+    background-color: var(--stimeo-danger, #ef4444); /* Utilise la couleur de votre charte */
+    color: #ffffff;
+
+    font-size: 0.65rem;      /* Taille de police miniature et lisible */
+    font-weight: 700;        /* Donne de l'impact au chiffre */
+    line-height: 1;
+
+    /* Gestion de la géométrie */
+    min-width: 15px;         /* Largeur minimale pour garantir un rond parfait avec 1 chiffre */
+    height: 15px;            /* Hauteur fixe identique à la largeur minimale */
+    padding: 0 4px;          /* Espace interne latéral si le chiffre passe à 2 ou 3 caractères (ex: "99+") */
+    border-radius: 9999px;   /* Forme parfaitement ronde qui s'étire en "pilule" si le texte grandit */
+
+    /* Centrage absolu du texte à l'intérieur de la pastille */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Ombre fine pour détacher visuellement le badge des éléments en arrière-plan */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+    /* Empêche l'utilisateur de sélectionner accidentellement le chiffre */
+    user-select: none;
+}
+
 /* =========================================
    UTILITAIRES
    ========================================= */
@@ -228,4 +264,41 @@ td{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+
+label {
+    position: relative;
+    display: inline-flex;  /* Permet au badge de se caler juste après le texte et non au bout de la ligne */
+    align-items: center;
+}
+
+.badge {
+    position: absolute;
+    top: -6px;               /* Remonte la pastille légèrement au-dessus du texte */
+    right: -16px;            /* Décale la pastille juste après le mot */
+
+    background-color: var(--stimeo-danger, #ef4444); /* Utilise la couleur de votre charte */
+    color: #ffffff;
+
+    font-size: 0.65rem;      /* Taille de police miniature et lisible */
+    font-weight: 700;        /* Donne de l'impact au chiffre */
+    line-height: 1;
+
+    /* Gestion de la géométrie */
+    min-width: 15px;         /* Largeur minimale pour garantir un rond parfait avec 1 chiffre */
+    height: 15px;            /* Hauteur fixe identique à la largeur minimale */
+    padding: 0 4px;          /* Espace interne latéral si le chiffre passe à 2 ou 3 caractères (ex: "99+") */
+    border-radius: 9999px;   /* Forme parfaitement ronde qui s'étire en "pilule" si le texte grandit */
+
+    /* Centrage absolu du texte à l'intérieur de la pastille */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Ombre fine pour détacher visuellement le badge des éléments en arrière-plan */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+    /* Empêche l'utilisateur de sélectionner accidentellement le chiffre */
+    user-select: none;
 }

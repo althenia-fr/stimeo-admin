@@ -15,7 +15,7 @@
       <button>Suivi</button>
       <button>Logisitique</button>
       <button :class="{ active: currentTab === 'Docs' }" @click="currentTab = 'Docs'">Documents</button>
-      <button>A compléter</button>
+      <button :class="{ active: currentTab === 'ToComplete' }" @click="currentTab = 'ToComplete'"><label>A compléter<span class="badge" v-if="toCompleteItemsCount>0">{{toCompleteItemsCount}}</span></label></button>
       <button :class="{ active: currentTab === 'Misc' }" @click="currentTab = 'Misc'">Divers</button>
 
     </div>
@@ -38,6 +38,7 @@ import router from "@/router/router.js";
 import PecDetailsMisc from "@/components/PecDetailsTabs/PecDetailsMisc.vue";
 import PecDetailsDocs from "@/components/PecDetailsTabs/PecDetailsDocs.vue";
 import PatientDetailsWithinPec from "@/components/PecDetailsTabs/PecDetailsPatient.vue";
+import PecDetailsToComplete from "@/components/PecDetailsTabs/PecDetailsToComplete.vue";
 
 const currentTab = ref('Patient');
 const goBack = () => router.back();
@@ -46,6 +47,7 @@ const activeTabComponent = computed(() => {
   if (currentTab.value === 'Patient') return PatientDetailsWithinPec;
   if (currentTab.value === 'Misc') return PecDetailsMisc;
   if (currentTab.value === 'Docs') return PecDetailsDocs;
+  if (currentTab.value === 'ToComplete') return PecDetailsToComplete;
 });
 
 const props = defineProps({
@@ -53,6 +55,10 @@ const props = defineProps({
 });
 
 const pec = ref({});
+
+const toCompleteItemsCount = computed(()=>{
+  return pec.value.billableDetails?.split(",").length;
+})
 
 const fetchPecData = async () => {
   if (pec.value.pecid) return; // Si les données existent, on ne fait rien
