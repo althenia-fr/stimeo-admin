@@ -36,7 +36,7 @@
             >
               <td class="cell-element">
                 <div class="element-content">
-                  <span class="element-name">{{ item.name }}</span>
+                  <span class="element-name">{{ capitalizeFirstLetter(item.name) }}</span>
                 </div>
               </td>
               <td class="cell-explanation">
@@ -163,6 +163,7 @@
 <script setup>
 
 import {computed, ref} from "vue";
+import {capitalizeFirstLetter} from "@/utils/format.js";
 
 const props = defineProps({
   pec: Object,
@@ -191,9 +192,9 @@ const missingElements = computed(()=>{
 
 function workoutExplanations(name)
 {
-  if(name.indexOf('IDEL')>-1) return "L'Ordonnance IDEL n'est pas signée. Dans l'onglet Documents vous pouvez la renvoyer au Médecin Prescripteur afin qu'il la signe."
-  else if(name.indexOf('ordonnance')>-1)  return "L'Ordonnance n'est pas signée. Dans l'onglet Documents vous pouvez la renvoyer au Médecin Prescripteur afin qu'il la signe."
-  else if(name.indexOf('consentement')>-1)  return "Le Consentement n'est pas été signé par le Patient. Dans l'onglet Documents vous pouvez la renvoyer au Patient afin qu'il la signe."
+  if(name.indexOf('IDEL')>-1) return "L'Ordonnance IDEL n'est pas signée. Dans l'onglet Documents vous pouvez envoyer un rappel par email au Médecin Prescripteur afin qu'il la signe."
+  else if(name.indexOf('ordonnance')>-1)  return "L'Ordonnance n'est pas signée. Dans l'onglet Documents vous pouvez envoyer un rappel par email au Médecin Prescripteur afin qu'il la signe."
+  else if(name.indexOf('consentement')>-1)  return "Le Consentement n'est pas été signé par le Patient. Dans l'onglet Documents vous pouvez envoyer un rappel par email au Patient afin qu'il le signe."
   else if(name.indexOf('docteur')>-1) return "Il y a une erreur sur cette fiche, car le Médecin Prescripteur, normalement obligatoire, est manquant. Contactez le support."
   else if(name.indexOf('établissement')>-1) return "Il y a une erreur sur cette fiche, car l'Etablissement, normalement obligatoire, est manquant. Contactez le support."
   else if(name.indexOf('patient')>-1) return "Il y a une erreur sur cette fiche, car le Patient, normalement obligatoire, est manquant. Contactez le support."
@@ -202,7 +203,7 @@ function workoutExplanations(name)
   else if(name.indexOf('naissance')>-1) return "La date de naissance du Patient est manquante. Mettez à jour la fiche Patient (Onglet Patient / Info Personnelles)"
   else if(name.indexOf('rang')>-1) return "Le rang du numéro sécu du Patient est manquant. Mettez à jour la fiche Patient (Onglet Patient / Tiers-Payant)"
   else if(name.indexOf('sécu')>-1) return "Le numéro sécu du Patient est manquant. Mettez à jour la fiche Patient (Onglet Patient / Tiers-Payant)"
-  else if(name.indexOf('complémentaire')>-1) return "Les infos sur la Mutuelle du Patient sont manquantes. Mettez à jour la fiche Patient (Onglet Patient / Tiers-Payant)"
+  else if(name.indexOf('mutuelle')>-1) return "Les infos sur la Mutuelle du Patient sont manquantes. Mettez à jour la fiche Patient (Onglet Patient / Tiers-Payant)"
   else return "??"
 
 }

@@ -119,6 +119,9 @@ label {
     color: #fff;
 }
 
+.txt-danger{
+    color: var(--stimeo-danger);
+}
 
 .btn-primary:hover:not(:disabled) {
     background: var(--stimeo-accent);

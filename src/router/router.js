@@ -14,6 +14,9 @@ import Idels from "@/views/Idels.vue";
 import IdelVisits from "@/views/IdelVisits.vue";
 import PatientDetails from "@/views/PatientDetails.vue";
 import PecDetails from "@/views/PecDetails.vue";
+import PecWizard from "@/views/PecWizard.vue";
+import ChangePassword from "@/views/ChangePassword.vue";
+import EditPassword from "@/views/EditPassword.vue";
 
 const routes = [
     {
@@ -24,7 +27,9 @@ const routes = [
         path: '/',
         component: BasicLayout,
         children: [
-            { path: 'login', component: Login }
+            { path: 'login', component: Login },
+            { path: 'change-password', component: ChangePassword },
+            { path: 'edit-password', component: EditPassword },
         ]
     },
     {
@@ -40,6 +45,7 @@ const routes = [
             { path: 'delegates', component: Delegates },
             { path: 'sites', component: Sites },
             { path: 'teams', component: Teams },
+            { path: 'pec/assistant', name:'pec-assistant', component: PecWizard},
             { path: 'pecs', component: Pecs , props: true},
             { path: 'pecs/:pecid', name:'pec', component: PecDetails , props: true},
             { path: 'teams/:tid', name:'members', component: TeamMembers, props: true },

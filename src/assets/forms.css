@@ -26,10 +26,10 @@
 }
 
 .form-group-inline label {
-    text-align: right;
+    text-align: left;
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--stimeo-text-light);
+    color: var(--stimeo-text);
     /* Forcer le saut de ligne si le label est trop long */
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -63,3 +63,59 @@
     text-align: center;
     margin-top: 1.5rem;
 }
+
+.field-disabled-box {
+    background-color: #f1f5f9;
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+    color: #64748b;
+    font-weight: 500;
+}
+
+
+/* Custom custom-switch-btn iOS-like architecture */
+.toggle-mode-wrapper { display: flex; align-items: center; gap: 0.5rem; }
+.toggle-label { font-size: 0.8rem; font-weight: 600; }
+.toggle-label.text-light { color: var(--stimeo-text-light); }
+.custom-switch-btn {
+    width: 36px; height: 20px; background-color: #cbd5e1; border-radius: 9999px;
+    position: relative; border: none; cursor: pointer; transition: background-color 0.2s;
+}
+.custom-switch-btn.switch-active { background-color: var(--stimeo-primary, #cabf75); }
+.switch-bullet {
+    width: 14px; height: 14px; background-color: #ffffff; border-radius: 50%;
+    position: absolute; top: 3px; left: 3px; transition: transform 0.2s;
+}
+.custom-switch-btn.switch-active .switch-bullet { transform: translateX(16px); }
+.custom-switch-btn.btn-xs { width: 28px; height: 14px; }
+.custom-switch-btn.btn-xs .switch-bullet { width: 10px; height: 10px; top: 2px; left: 2px; }
+.custom-switch-btn.btn-xs.switch-active .switch-bullet { transform: translateX(14px); }
+
+/* input field with search and dropdown  */
+
+.relative-position { position: relative; }
+.dropdown-wrapper-container { width: 100%; position: relative; }
+
+
+.autocomplete-dropdown {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: #ffffff;
+    border: 1px solid var(--stimeo-border);
+    border-radius: 6px;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    max-height: 180px;
+    overflow-y: auto;
+    z-index: 300;
+    margin-top: 4px;
+}
+.dropdown-item {
+    width: 100%; text-align: left; padding: 0.3rem 0.6rem;
+    background: none; border: none; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.85rem;
+}
+.dropdown-item:hover { background-color: #f8fafc; }
+
+.form-group-inline-switch { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0;}

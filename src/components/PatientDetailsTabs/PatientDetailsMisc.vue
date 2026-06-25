@@ -86,7 +86,7 @@ const doDeletePatient = async () => {
     }
     else
     {
-      msgModal.show('Erreur', "code "+response.status, 'OK',function(){msgModal.defaultClose()});
+      msgModal.show('Erreur', "code "+response.status, 'OK',msgModal.defaultClose);
     }
 
   } catch (error) {
@@ -94,7 +94,7 @@ const doDeletePatient = async () => {
     console.error("Erreur:",err );
     if(err==='DATA_EXISTS') err = "On ne peut pas effacer le Patient car il est relié à des Prises en Charges";
 
-    msgModal.show('Erreur', err, 'OK',function(){msgModal.defaultClose();});
+    msgModal.show('Erreur', err, 'OK',msgModal.defaultClose);
   }
 };
 

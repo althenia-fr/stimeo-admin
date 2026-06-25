@@ -3,7 +3,7 @@
     <div v-if="msgModal.isOpen" class="modal-overlay" @click.self="msgModal.defaultClose()">
 
       <div class="modal-content">
-        <h3>{{ msgModal.title }}</h3>
+        <h3 :class="txtDanger" :style="txtColor">{{ msgModal.title }}</h3>
 
         <p class="modal-message" style="text-align: justify;" v-html="msgModal.message"></p>
 
@@ -39,7 +39,9 @@ import { msgModal } from '@/utils/modals/msg-modal.js';
 import {computed} from "vue";
 
 const btnDanger = computed(() => msgModal.danger?'btn-danger':'btn-primary')
+const txtDanger = computed(() => msgModal.danger?'txt-danger':'')
 const bkColor = computed(() => msgModal.button2Color?'background-color:'+msgModal.button2Color:'')
+const txtColor = computed(() => msgModal.button2Color?'color:'+msgModal.button2Color:'')
 
 </script>
 

@@ -4,6 +4,7 @@
       <router-view />
     </div>
   </div>
+  <MsgModal />
 </template>
 
 <style scoped>
@@ -42,3 +43,6 @@
 .brand-name .dot { color: var(--stimeo-accent); }
 .brand-name .sub { font-weight: 400; font-size: 1.1rem; color: var(--stimeo-text-light); }
 </style>
+<script setup>
+import MsgModal from "@/components/modals/MsgModal.vue";
+</script>

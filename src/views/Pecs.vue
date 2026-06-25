@@ -15,7 +15,7 @@
             class="search-input"
         />
       </div>
-      <button class="btn btn-primary" @click="ctaStimeoConnect">
+      <button class="btn btn-primary" @click="goToPecAssistant">
         <font-awesome-icon icon="fa-solid fa-plus"/> Ajouter une PEC
       </button>
     </div>
@@ -28,10 +28,9 @@
 </template>
 
 <script setup>
-import {computed, ref} from 'vue';
+import {ref} from 'vue';
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import router from "@/router/router.js";
-import {msgModal} from "@/utils/modals/msg-modal.js";
 import PecTable from "@/components/PecTable.vue";
 
 
@@ -43,13 +42,10 @@ const search = ref('');
 const pecs = ref([])
 
 
-function ctaStimeoConnect()
-{
-  let msg = "Pour créer une nouvelle Prise en Charge, utilisez Stimeo Connect.<br/><br/> " +
-      "Vous pouvez créer le Patient au préalable ici dans l'Admin.<br/><br/> " +
-      "Eventuellement, créez-le profil IDEL ici dans l'Admin. Une invitation SMS sera envoyée à l'IDEL pour installer l'App Thérésa. " +
-      "Quand vous remplirez la PEC dans Stimeo Connect, veillez bien à mettre le numéro mobile de l'IDEL pour faire le lien avec son profil."
-  msgModal.show('Utilisez Stimeo Connect', msg, 'OK',msgModal.defaultClose);
+function goToPecAssistant(){
+  router.push({
+    name: 'pec-assistant',
+  });
 }
 
 

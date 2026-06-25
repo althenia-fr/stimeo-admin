@@ -1,7 +1,8 @@
 <template>
   <div>
     <img src="/stimeo_logo.png" alt="stimeo logo" width="100" style="display:block; margin: auto">
-    <p class="subtitle" style="display: block;margin:  0 auto 2rem auto;width: fit-content">Console d'administration</p>
+    <br/>
+    <h3  style="display: block;margin:  0 auto 2rem auto;width: fit-content">Connexion</h3>
 
     <form @submit.prevent="handleLogin">
       <div class="form-group">
@@ -21,24 +22,27 @@
     </form>
 
     <div class="form-footer">
-      <router-link to="/change-password" class="link">Changer le Mot de passe</router-link>
+      <router-link to="/change-password" class="link">Nouveau Mot de passe</router-link>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
+import {useRoute, useRouter} from 'vue-router';
 import axios from "axios";
 import {API_BASE_URL} from "@/utils/http.js";
 import {storageService} from "@/utils/storage.js";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {goTo} from "@/router/router.js";
 import {prettyPrintErrorMsg} from "@/utils/error.js";
 const router = useRouter();
+const route = useRoute();
+
+const error = route.query.error;
 
 const email = ref('');
 const password = ref('');
-const errorMsg = ref('&nbsp;');
+const errorMsg = ref(error || '&nbsp;');
 
 const handleLogin = async () => {
 

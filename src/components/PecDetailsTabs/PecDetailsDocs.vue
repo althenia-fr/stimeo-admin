@@ -30,7 +30,9 @@
               <font-awesome-icon icon="fa-solid fa-download" />
               Télécharger
             </a>
+            <br v-if="!doc.party1Signed" />
 
+            <a v-if="!doc.party1Signed" class="btn btn-download" @click="function(){sendReminder(doc,pec.patientName)}">Envoyer un rappel</a>
 
           </div>
 
@@ -82,6 +84,14 @@
 import {ref} from 'vue';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import router from "@/router/router.js";
+import {msgModal} from "@/utils/modals/msg-modal.js";
+import {idelModal} from "@/utils/modals/idel-modal.js";
+import {patientData} from "@/utils/patient.js";
+import {storageService} from "@/utils/storage.js";
+import axios from "axios";
+import {API_BASE_URL} from "@/utils/http.js";
+import {prettyPrintErrorMsg} from "@/utils/error.js";
+import {capitalizeFirstLetter} from "../../utils/format.js";
 
 const props = defineProps({
   pec: Object,
@@ -108,8 +118,49 @@ const prevPage = () => {
   else currentPage.value = selectedDoc.value.totalPages
 };
 
-function capitalizeFirstLetter(val) {
-  return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+function sendReminder(doc,patientName){
+
+  async function doSendReminder()
+  {
+
+    try {
+      const payload = {
+        sdid: doc.sdid,
+      };
+
+      let admin = storageService.getItem('admin');
+      let axiosRequestConfig = {
+        headers: {
+          'Content-Type':'application/json; charset=utf-8',
+          'Authorization': 'Basic ' + admin.secret,
+        }
+      }
+
+      // 3. Appel POST Axios standard
+      msgModal.show('Opération en cours', "Veuillez patienter...");
+      const response = await axios.post(API_BASE_URL+'/admin/signreminder', payload,axiosRequestConfig);
+      msgModal.defaultClose();
+
+      if(response.status===200)
+      {
+        msgModal.show('Succès', "Le rappel a été envoyé", 'OK',msgModal.defaultClose);
+      }
+      else
+      {
+        msgModal.show('Erreur', "code "+response.status, 'OK',msgModal.defaultClose);
+      }
+
+    } catch (error) {
+      let err = error.response?prettyPrintErrorMsg(error.response):error.message
+      console.error("Erreur:",err );
+      msgModal.show('Erreur', err, 'OK',msgModal.defaultClose);
+    }
+  }
+
+  let msg = "Voulez-vous vraiment envoyer un email de rappel à "+doc.party1Name+" pour la signature du document "+capitalizeFirstLetter(doc.docTypeLongLabel)+"?"
+
+  msgModal.show("Rappel", msg, 'Oui, envoyer',doSendReminder,'Annuler',msgModal.defaultClose,true);
+
 }
 
 </script>

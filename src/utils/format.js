@@ -86,3 +86,10 @@ export function formatDate(event,targetObj,key){
     // 4. On met à jour la variable réactive
     targetObj[key] = formattedInput;
 };
+
+export function capitalizeFirstLetter(val) {
+    if( !val) return val;
+    val = val.trim()
+    let capitalized =  String(val).charAt(0).toUpperCase() + String(val).slice(1);
+    return capitalized
+}
