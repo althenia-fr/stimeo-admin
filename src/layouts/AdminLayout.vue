@@ -82,6 +82,34 @@
         </div>
 
 
+        <div>
+
+          <div
+              class="menu-item group-title"
+              @click="toggleCRP"
+              :class="{ 'open': isCRPOpen }"
+          >
+            <font-awesome-icon :icon="isCRPOpen ? 'fa-regular fa-square-minus' : 'fa-solid fa-phone'"/>
+            <span class="label">CRP</span>
+          </div>
+
+          <div class="sub-menu" v-show="isCRPOpen">
+
+            <router-link to="/auth/crp/followup" class="menu-item" active-class="active">
+              <font-awesome-icon icon="fa-solid fa-phone"/>
+              <span class="label">Suivi</span>
+            </router-link>
+
+            <router-link to="/auth/crp/missing" class="menu-item" active-class="active">
+              <font-awesome-icon icon="fa-solid fa-triangle-exclamation"/>
+              <span class="label">Doc manquants</span>
+            </router-link>
+
+
+          </div>
+
+        </div>
+
 
       </nav>
 
@@ -116,6 +144,11 @@ const toggleOrganisation = () => {
 const isIdelOpen = ref(false);
 const toggleIdels = () => {
   isIdelOpen.value = !isIdelOpen.value;
+};
+
+const isCRPOpen = ref(false);
+const toggleCRP = () => {
+  isCRPOpen.value = !isCRPOpen.value;
 };
 
 const logout = () => {

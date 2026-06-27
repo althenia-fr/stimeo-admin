@@ -133,7 +133,6 @@ function toggleAutoriseCoordination() {
 @import '@/assets/card.css';
 
 .text-primary-color { color: var(--stimeo-primary); }
-.required-star { color: var(--stimeo-danger); }
 .padding-y { padding: 0.5rem 0; }
 .border-none { border-bottom: none !important; }
 .label-text-main { font-size: 0.95rem; color: #334155; font-weight: 500; }

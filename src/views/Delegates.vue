@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="page-header">
       <div class="header-titles">
-        <h2 class="title"><font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/> Délégués Stimeo</h2>
+        <h2 class="title">Délégués Stimeo</h2>
         <p class="subtitle">Gestion des Délégués Médicaux</p>
       </div>
       <button class="btn btn-primary" @click="delegateModal.openAddModal">

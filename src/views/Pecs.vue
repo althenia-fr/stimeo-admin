@@ -3,7 +3,7 @@
 
     <div class="page-header">
       <div class="header-titles">
-        <h2 class="title"><font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/> Prises en charge</h2>
+        <h2 class="title">Prises en charge</h2>
         <p class="subtitle">Gestion des Prises en charge</p>
       </div>
       <div class="search-wrapper">

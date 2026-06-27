@@ -4,7 +4,6 @@
     <div class="page-header">
       <div class="header-titles">
         <h2 class="title">
-          <font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/>
           Interventions Idels
         </h2>
         <p class="subtitle">Suivi des Rendez-Vous Idels</p>

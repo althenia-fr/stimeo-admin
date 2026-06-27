@@ -3,7 +3,7 @@
 
     <div class="page-header">
       <div class="header-titles">
-        <h2 class="title"><font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/> Patients</h2>
+        <h2 class="title">Patients</h2>
         <p class="subtitle">Gestion des Patients</p>
       </div>
       <div class="search-wrapper">

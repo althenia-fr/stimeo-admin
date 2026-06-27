@@ -46,8 +46,8 @@ export function refreshReactiveFormForVisualFeedback(jsonPatient)
 
 export const savePatient = async () => {
 
-    patientData.value.user.msisdn = mobile2msisdn(patientData.value.user.mobile)
-    patientData.value.patient.birthdate = localeToIsoDate(patientData.value.patient.localeBirthdate)
+    if(patientData.value.user.mobile) patientData.value.user.msisdn = mobile2msisdn(patientData.value.user.mobile)
+    if(patientData.value.patient.localeBirthdate) patientData.value.patient.birthdate = localeToIsoDate(patientData.value.patient.localeBirthdate)
     if(patientData.value.patient.localeDeathdate) patientData.value.patient.deathdate = localeToIsoDate(patientData.value.patient.localeDeathdate)
 
     try {

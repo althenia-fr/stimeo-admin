@@ -119,3 +119,6 @@
 .dropdown-item:hover { background-color: #f8fafc; }
 
 .form-group-inline-switch { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0;}
+
+
+.required-star { color: var(--stimeo-danger) !important;}

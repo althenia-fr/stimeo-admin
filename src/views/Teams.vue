@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="page-header">
       <div class="header-titles">
-        <h2 class="title"><font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/> Services</h2>
+        <h2 class="title">Services</h2>
         <p class="subtitle">Gestion des Services</p>
       </div>
       <div class="search-wrapper">

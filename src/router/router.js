@@ -17,6 +17,8 @@ import PecDetails from "@/views/PecDetails.vue";
 import PecWizard from "@/views/PecWizard.vue";
 import ChangePassword from "@/views/ChangePassword.vue";
 import EditPassword from "@/views/EditPassword.vue";
+import CRPModule from "@/views/CRPModule.vue";
+import Empty from "@/views/Empty.vue";
 
 const routes = [
     {
@@ -53,6 +55,8 @@ const routes = [
             { path: 'patients/:uid', name:'patient',  component: PatientDetails, props: true },
             { path: 'idels/list', component: Idels },
             { path: 'idels/visits', component: IdelVisits },
+            { path: 'crp/followup', component: CRPModule },
+            { path: 'crp/missing', component: Empty },
 
         ]
     },

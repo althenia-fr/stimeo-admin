@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="page-header">
       <div class="header-titles">
-        <h2 class="title"><font-awesome-icon @click="goBack" class="clickable" icon="fa-solid fa-arrow-left-long"/> Etablissement</h2>
+        <h2 class="title">Etablissement</h2>
         <p class="subtitle">Gestion des Etablissements de soin</p>
       </div>
       <button class="btn btn-primary" @click="siteModal.openAddModal">

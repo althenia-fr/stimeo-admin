@@ -5,7 +5,7 @@
       <div class="card-grid-2x">
 
         <div class="info-card">
-          <h3 class="card-title">État Civil</h3>
+          <h3 class="card-title">État Civil  <span class="required-star">*</span></h3>
           <div class="form-group-inline"><label>Civilité</label>
             <select  v-model="patientData.patient.gender" class="form-control">
               <option :value=0 disabled>Choisissez...</option>
@@ -20,13 +20,13 @@
         </div>
 
         <div class="info-card">
-          <h3 class="card-title">Coordonnées</h3>
+          <h3 class="card-title">Coordonnées  <span class="required-star">*</span></h3>
           <div class="form-group-inline"><label>Mobile</label><input type="text" class="form-control" v-model="patientData.user.mobile"/></div>
           <div class="form-group-inline"><label>Email</label><input type="email" class="form-control" v-model="patientData.user.email"/></div>
         </div>
 
         <div class="info-card">
-          <h3 class="card-title">Adresse personnelle</h3>
+          <h3 class="card-title">Adresse personnelle  <span class="required-star">*</span></h3>
           <div class="form-group-inline"><label>Adresse</label><input type="text" class="form-control" v-model="patientData.personalAddress.add1" /></div>
           <div class="form-group-inline"><label>Complément</label><input type="text" class="form-control" v-model="patientData.personalAddress.add2"  /></div>
           <div class="form-group-inline"><label>Code Postal</label><input type="text" class="form-control" v-model="patientData.personalAddress.zip"  /></div>
