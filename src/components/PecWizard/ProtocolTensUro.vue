@@ -167,9 +167,9 @@ const protocolObjectives = ['Mictions','Urgenturies','Mictions nocturnes','Urgen
         <label>Démarrage à partir de :</label>
         <select v-model="wizardPecForm.protocolTensUro.assessmentStartWeeks" class="form-control">
           <option :value=null disabled>Veuillez choisir...</option>
-          <option :value="4">4 semaines de traitement</option>
-          <option :value="6">6 semaines de traitement</option>
-          <option :value="8">8 semaines de traitement</option>
+          <option :value=4>4 semaines de traitement</option>
+          <option :value=6>6 semaines de traitement</option>
+          <option :value=8>8 semaines de traitement</option>
         </select>
       </div>
     </div>

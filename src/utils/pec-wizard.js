@@ -12,7 +12,7 @@ export const wizardPecForm = reactive({
     protocol : 0 ,
     header :{
         patientUid: 0,
-        authorUid: admin.uid,
+        authorUid: admin?.uid,
         visibleTid: null,
         onBehalfOf: 0,
     },
@@ -169,7 +169,7 @@ export const fetchAutocomplete = async (query,medicalBase,controller) => {
         let axiosRequestConfig = {
             headers: {
                 'Content-Type':'application/json; charset=utf-8',
-                'Authorization': 'Basic ' + admin.secret,
+                'Authorization': 'Basic ' + admin?.secret,
             },
             signal:controller.signal
         }
